@@ -1,12 +1,4 @@
 CREATE DATABASE ppe_inventory;
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
-CREATE TABLE target_config
-(
-  target_id SERIAL PRIMARY KEY,
-  description VARCHAR(50) NOT NULL
-);
-
 
 CREATE TABLE users
 (
@@ -29,4 +21,8 @@ CREATE TABLE admin
   role VARCHAR(255)
 );
 
-
+CREATE TABLE target_config
+(
+  target_id SERIAL PRIMARY KEY,
+  description VARCHAR(50) NOT NULL
+);

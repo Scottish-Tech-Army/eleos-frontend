@@ -26,8 +26,6 @@ const Register = ({ setAuth }) => {
   const [allConfig, setAllConfig] = useState([]);
   const [loading, setLoading] = useState(false);
   const classes = useStyles();
-  
-  // Declare registration fields
   const [inputs, setInputs] = useState({
     name: '',
     subdomain: '',
@@ -102,7 +100,6 @@ const Register = ({ setAuth }) => {
     getAllConfig();
   }, []);
 
-  // Container for page
   return (
     <Container component='main' spacing={1} maxWidth='sm'>
       <Paper className={classes.paper} maxWidth='sm'>
