@@ -5,13 +5,13 @@ const app = require('../app');
 
 const newUser = {
   name: 'Eugene',
-  subdomain: 'eugenesdomain',
+  subdomain: 'burillo',
   admin_email: 'eugene.nazarovs@codeclan.com',
   target_config_id: '1',
   admin_password: 'password12345',
   admin_firstname: 'Eugene',
   admin_lastname: 'Nazarovs',
-  admin_phone: '123456789',
+  admin_phone: '07772690728',
   active: 'true',
 };
 
@@ -49,7 +49,7 @@ describe('POST /auth/register', () => {
       .send(newUser)
       .expect(422);
     expect(response.body.message).to.equal(
-      '"subdomain" length must be at least 4 characters long'
+      '"subdomain" length must be at least 4 characters long',
     );
   });
 });
