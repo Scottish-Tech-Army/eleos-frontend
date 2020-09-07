@@ -1,5 +1,5 @@
 CREATE DATABASE ppe_inventory;
-
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE TABLE users
 (
   user_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),

@@ -9,6 +9,7 @@
     "seed:admin": "node src/tasks/createAdminUser.js",
     "lint": "eslint src/",
     "test": "mocha src/*.test.js src/**/*.test.js src/**/**/*.test.js --watch"
+    
   },
   "keywords": [],
   "author": "",
@@ -33,4 +34,5 @@
     "mocha": "^8.1.0",
     "supertest": "^4.0.2"
   }
+  
 }

@@ -66,3 +66,39 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+## File Structure
+
+- client
+    - public (index.html, favicon, manifest.json, robots.txt, favicon)
+    - src 
+        - components
+            - admin
+            - customer
+            - Header.js
+        - images
+        - styles
+        - App (css/js)
+        - index (css/js)
+- server
+    - src
+        - api
+            - targetConfigs (loads the targetConfigs from local db)
+            - user (user config, middleware, etc)
+        - auth (api)
+        - dashboard (api)
+        - db (postgres connection with user / ppe_inventory. Called via api->users)
+        - tasks (createAdminUser.js - admin:seed)
+        - util (jwt (encryption) gen)
+        - app.js
+        - common.test.js
+        - index.js
+
+# Commands
+
+`node seed:admin` runs `node src/tasks/createAdminUser.js`
+`INSERT INTO target_config (target_id, description) VALUES (1,'test');`
+
+eugene.nazarovs@gmail.com
+passwordpassword
