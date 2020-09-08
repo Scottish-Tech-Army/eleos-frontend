@@ -3,6 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import EditUserDetails from './EditUserDetails';
+import Grid from '@material-ui/core/Grid';
 import UserDetails from './UserDetails';
 import { useStyles } from '../../styles/DashboardStyles';
 
@@ -36,6 +37,10 @@ const Dashboard = ({ setAuth }) => {
     isEditing ? setIsEditing(false) : setIsEditing(true);
   };
 
+  const straightThrough = () => {
+    isEditing ? setIsEditing(false) : setIsEditing(true);
+  };
+
   useEffect(() => {
     getUserDetails();
   }, [isEditing]);
@@ -52,8 +57,10 @@ const Dashboard = ({ setAuth }) => {
         ) : (
           <EditUserDetails {...userDetails} toggleEdit={toggleEdit} />
         )}
+        <Grid container spacing={2}>
+        <Grid item xs={12}>
         <div className={classes.buttons}>
-          {!isEditing && (
+        {!isEditing && (
             <Button
               type="submit"
               variant="contained"
@@ -61,10 +68,23 @@ const Dashboard = ({ setAuth }) => {
               onClick={toggleEdit}
               className={classes.button}
             >
+              Proceed to instance  
+            </Button>
+          )}
+          {!isEditing && (
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              onClick={straightThrough}
+              className={classes.button}
+            >
               Update
             </Button>
           )}
         </div>
+        </Grid>
+        </Grid>
       </Paper>
     </div>
   );

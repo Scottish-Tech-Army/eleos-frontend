@@ -18,5 +18,6 @@ cd eleos
 # Not sure why I need to keep doing these
 rm -rf node_modules/eslint
 rm -rf node_modules/jest
+rm -rf node_modules/babel-jest
 npm i jspdf@2.1.0 --save
 npm run dev
