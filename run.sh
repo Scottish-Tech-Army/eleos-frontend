@@ -14,4 +14,9 @@ echo "MPWD=" $MPWD
 cd eleos
 #node src/tasks/createAdminUser.js
 #check for env here
+
+# Not sure why I need to keep doing these
+rm -rf node_modules/eslint
+rm -rf node_modules/jest
+npm i jspdf@2.1.0 --save
 npm run dev

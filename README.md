@@ -1,5 +1,15 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Prerequisites
+
+This project requires `npm`
+
+## Getting Started
+
+## Running
+
+`./run.sh` on UNIX environments 
+
 ## Available Scripts
 
 In the project directory, you can run:
