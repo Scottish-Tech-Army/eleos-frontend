@@ -81,8 +81,8 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
         - styles
         - App (css/js)
         - index (css/js)
-- server
-    - src
+- 
+    - src (server)
         - api
             - targetConfigs (loads the targetConfigs from local db)
             - user (user config, middleware, etc)
@@ -99,6 +99,8 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 `node seed:admin` runs `node src/tasks/createAdminUser.js`
 `INSERT INTO target_config (target_id, description) VALUES (1,'test');`
+`npm i --s concurrently`
+`npm install cors --save`
 
 eugene.nazarovs@gmail.com
 passwordpassword
