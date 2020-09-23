@@ -39,34 +39,35 @@ This project requires `npm`
 
 ## Running
 
-In development, you must run both the server and client at the same time.
-
-## Available Scripts
-
-`./run.sh` on UNIX environments 
-
-## NPM
-
-### `npm start`
-
-Runs the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+`npm start` the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits. You will also see any lint errors in the console.
 
-### `npm test`
+### Testing
 
-Launches the test runner in the interactive watch mode.<br />
+`npm test` Launches the test runner in the interactive watch mode.<br />
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+### Deploying
 
-Builds the app for production to the `build` folder.<br />
+`npm run build` bio;ds the app for production to the `build` folder.<br />
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+# Commands & Credentials
+
+`node seed:admin` runs `node src/tasks/createAdminUser.js`
+`INSERT INTO target_config (target_id, description) VALUES (1,'test');`
+`npm i --s concurrently`
+`npm install cors --save`
+
+eugene.nazarovs@gmail.com
+passwordpassword
+
 
 ## Learn More
 
@@ -99,19 +100,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 
 
-
-## Notes
-
-
-
-# Commands
-
-`node seed:admin` runs `node src/tasks/createAdminUser.js`
-`INSERT INTO target_config (target_id, description) VALUES (1,'test');`
-`npm i --s concurrently`
-`npm install cors --save`
-
-eugene.nazarovs@gmail.com
-passwordpassword
-
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+
+
