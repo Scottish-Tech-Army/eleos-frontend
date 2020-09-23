@@ -2,46 +2,29 @@
 
 > This is the repository for the Eleos front-end, it consists of two React applications. Material-UI as visual framework and Material Table for the database table in the admin section.
 
-* a `server` app (`eleos-api` on AWS) which is built and deployed statically
-* a `client` app which is deployed on Electric Beanstalk
+* a `client` app (`eleos-frontend`) which is built and deployed statically
+  * http://eleosfrontend.s3-website.eu-north-1.amazonaws.com/ (eugene.nazarovs@gmail.com : passwordpassword)
+* a `server` app (`eleos-api`) which is deployed on Electric Beanstalk
+  * http://eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com/
+
+- [ ] TODO: Centralised key-share? 
 
 ## Getting Started
 
-### Running
+### Prereq
+* aws
+* npm
+* eb
+* s3cmd
 
-> Both the server and client app must be running at the same time
+### Credentials
+**Static**
 
-Use `npm start` the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-http://eleosfrontend.s3-website.eu-north-1.amazonaws.com/
-
-```
-eugene.nazarovs@gmail.com
-passwordpassword
-```
-
-The page will reload if you make edits. You will also see any lint errors in the console.
-
-#### Credentials
-> The credentials expire for AWS every 12 hours and must be constantly reset. 
-
-You can check your current credentials with;
-```
-echo $AWS_ACCESS_KEY_ID 
-echo $AWS_SECRET_ACCESS_KEY 
-echo $AWS_SESSION_TOKEN
-```
-
-Other places credentials are saved are
-```
-aws configure
-vi ~/.
 > The databases for Eleos are configured within the AWS Management console at `Elastic Beanstalk -> Configuration -> Database`
-```
-export setenv jwtSecret=aba318899cb6a81ff9698733c21d5e61406964272c5b7efe1fdfc55db410bf35
-export setenv DEFAULT_ADMIN_PASSWORD=passwordpassword
-export setenv MPWD=Kaplan_12
 
+[EC2 Database manager (243)](http://ec2-3-10-212-243.eu-west-2.compute.amazonaws.com/web/database/manager)
+
+```
 # Amazon Relational Database Service (Amazon RDS)
 # database: 'ebdb'
 export setenv RDS_USERNAME=dbuser
@@ -51,17 +34,26 @@ export setenv RDS_PORT=5432
 npm start
 ```
 
-http://ec2-3-10-212-243.eu-west-2.compute.amazonaws.com/web/database/manager
+**Dynamic**
+> The credentials expire for AWS every 12 hours and must be constantly reset. 
+
+
+Environmental variables may be saved in the following locations and need updated
+```
+aws configure
+vi ~/.s3cfg
+echo $AWS_ACCESS_KEY_ID 
+echo $AWS_SECRET_ACCESS_KEY 
+echo $AWS_SESSION_TOKEN
+```
 
 ### Testing
+```
+cd eleos-frontend-api
+npm test
+```
 
-`npm test` Launches the test runner in the interactive watch mode.<br /> 
-
-Run this in the `eleos-frontend-api` folder
-
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### 🚀 Deploying
+## 🚀 Deploying
 - cd eleos-frontend --> `npm run build` builds the app for production to the `build` folder --> deployed on S3
 - cd eleos-api --> eb deploy --> eleos-api: ec2-user@35.178.210.66
 
@@ -80,7 +72,7 @@ cd eleos-api
 eb deploy
 ```
 
-### Access
+## Access
 
 **Accessing E2**
 
@@ -98,19 +90,9 @@ ssh -i ODOO.pem ubuntu@ec2-3-10-212-243.eu-west-2.compute.amazonaws.com
 
 #### Accessing Electric Beanstalk
 > ec2-user@35.177.42.131
-
-**Set your AWS environmental variables** available at [https://scottishtecharmy.awsapps.com/start#/](scottishtecharmy.awsapps.com/start)
-```
-export AWS_ACCESS_KEY_ID=""
-export AWS_SECRET_ACCESS_KEY=""
-export AWS_SESSION_TOKEN=""
-```
-
-This needs to be repeated every 12 hours as the keys are refreshed. 
-
 ```
 cd eleos-frontend-api
-eb init -i
+eb status
 ```
 
 **Platform**
@@ -118,18 +100,6 @@ eb init -i
 - Node.js 12 running on 64bit Amazon Linux 2
 
 
-This must be set to 
-
-**Application**
-```
-Select an application to use
-1) eleos-api
-2) eleos-frontend-api
-3) [ Create new Application ]
-(default is 3): 1
-```
-
-[ ] TODO: Centralised key-share? 
 # SSH
 
 ```
@@ -149,7 +119,8 @@ Select an application to use
 [ec2-user@ip-172-31-22-231 ~]$ pwd
 /home/ec2-user
 ```
-### :open_file_folder: File Structure
+
+## :open_file_folder: File Structure
 
 - **eleos-api**
     - api
@@ -177,7 +148,7 @@ Select an application to use
         - index (css/js)
 
 
-# Commands & Credentials
+# 📝 Notes
 
 `node seed:admin` runs `node src/tasks/createAdminUser.js`
 `INSERT INTO target_config (target_id, description) VALUES (1,'test');`
