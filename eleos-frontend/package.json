@@ -27,7 +27,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src/",
-    "prod": "NODE_ENV=production node src/index.js"
+    "prod": "NODE_ENV=production node src/index.js",
+    "deploy": "npm run build && s3cmd sync build/* s3://eleosfrontend && echo '🚀  Deployed!'"
   },
   "proxy": "http://localhost:5000",
   "browserslist": {

@@ -68,7 +68,7 @@ const UserList = ({ allUsers, setChangeUser, allConfig }) => {
   return (
     <>
       <MaterialTable
-        title='All Organisations'
+        title='All Organisations' // Removed all to test push
         columns={columns}
         data={allUsers}
         actions={actions}

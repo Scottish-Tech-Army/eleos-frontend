@@ -43,23 +43,31 @@ This project requires `npm`
 
 Use `npm start` the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+```
+eugene.nazarovs@gmail.com
+passwordpassword
+```
+
 The page will reload if you make edits. You will also see any lint errors in the console.
 
 #### Credentials
 
->Elastic Beanstalk -> Configuration -> Database
+> The databases for Eleos are configured within the AWS Management console at `Elastic Beanstalk -> Configuration -> Database`
 ```
 export setenv jwtSecret=aba318899cb6a81ff9698733c21d5e61406964272c5b7efe1fdfc55db410bf35
 export setenv DEFAULT_ADMIN_PASSWORD=passwordpassword
 export setenv MPWD=Kaplan_12
 
 # Amazon Relational Database Service (Amazon RDS)
-# database: 'ebdb',
+# database: 'ebdb'
 export setenv RDS_USERNAME=dbuser
 export setenv RDS_PASSWORD='U5xD2BQqP-ayh&nq'
-export setenv RDS_HOSTNAME=aaharaujhpjxt7.cqrta6bb4sbn.eu-west-2.rds.amazonaws.com
-export setenv RDS_PORT=5432 
+export setenv RDS_HOSTNAME='aaharaujhpjxt7.cqrta6bb4sbn.eu-west-2.rds.amazonaws.com'
+export setenv RDS_PORT=5432
+npm start
 ```
+
+http://ec2-3-10-212-243.eu-west-2.compute.amazonaws.com/web/database/manager
 
 ### Testing
 
@@ -72,12 +80,26 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 ### Deploying
 
 
-- server --> eleos-api: ec2-user@35.178.210.66
-- client --> `npm run build` builds the app for production to the `build` folder --> deployed on EB
+- eleos-api --> eleos-api: ec2-user@35.178.210.66
+- eleos-frontend --> `npm run build` builds the app for production to the `build` folder --> deployed on S3
+
+Pushing the static files to the s3://eleosfrontend
+```
+cd eleos-api-frontend
+brew install s3cmd
+s3cmd --configure
+s3cmd sync build s3://eleosfrontend
+ ```
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ### Access
+
+**Accessing E2**
+
+```
+ssh -i ODOO.pem ubuntu@ec2-3-10-212-243.eu-west-2.compute.amazonaws.com
+```
 
 **Accessing the S3 instance**
 ```
@@ -88,11 +110,26 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ```
 
 #### Accessing Electric Beanstalk
+> ec2-user@35.177.42.131
+
+Navigate to https://scottishtecharmy.awsapps.com/start#/
+Set your AWS environmental variables
+
+```
+export AWS_ACCESS_KEY_ID=""
+export AWS_SECRET_ACCESS_KEY=""
+export AWS_SESSION_TOKEN=""
+```
+
+This needs to be repeated every [ ] hours as the keys are refreshed. 
+
+```
+cd eleos-frontend-api
+eb init -i
+```
 
 **Region**
 ```
-➜  eb init -i
-
 Select a default region
 ...
 16) eu-west-2 : EU (London)
@@ -101,6 +138,7 @@ Select a default region
 ```
 
 This must be set to **(16) eu-west-2 : EU (London)**
+
 **Application**
 ```
 Select an application to use
@@ -138,7 +176,7 @@ continuing with initialization
 Do you want to set up SSH for your instances?
 (Y/n): Y
 ```
-   - **SSH**
+**SSH**
 ```
 Select a keypair.
 1) aws-eb
@@ -148,13 +186,10 @@ Select a keypair.
 (default is 4): 2
 ```
 
+[ ] TODO: Centralised key-share? 
+
 ```
 ➜  eb ssh
-
-Select an instance to ssh into
-1) i-0044ac97063c10394
-2) i-0c477c9a18bde7459
-(default is 1): 1
 
 INFO: Running ssh -i /Users/pseudo/.ssh/mark-keypair ec2-user@35.178.210.66
 The authenticity of host '35.178.210.66 (35.178.210.66)' can't be established.
@@ -176,10 +211,6 @@ Warning: Permanently added '35.178.210.66' (ECDSA) to the list of known hosts.
 [ec2-user@ip-172-31-22-231 ~]$ pwd
 /home/ec2-user
 ```
-
-
-
-
 
 # Commands & Credentials
 
@@ -224,6 +255,3 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-
-
