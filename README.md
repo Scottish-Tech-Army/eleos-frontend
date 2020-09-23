@@ -5,7 +5,7 @@ This is the repository for the Eleos front-end, it consists of two React applica
 * a `server` app (`eleos-fronted-api` on AWS) which is built and deployed statically
 * a `client` app which is deployed on Electric Beanstalk
 
-### File Structure
+### :open_file_folder: File Structure
 
 - client
     - public (index.html, favicon, manifest.json, robots.txt, favicon)
@@ -37,7 +37,7 @@ This is the repository for the Eleos front-end, it consists of two React applica
 
 This project requires `npm`
 
-## Running
+### Running
 
 `npm start` the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
