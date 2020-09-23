@@ -1,5 +1,5 @@
 cd ..
-cd eleos
+cd eleos-frontend-api
 rm -rf package-lock.json
 rm -rf node-modules
 cd ..
@@ -9,4 +9,4 @@ rm -rf node-modules
 npm install
 cd ..
 npm install 
-npm run dev
+npm start

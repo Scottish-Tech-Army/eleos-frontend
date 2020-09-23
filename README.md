@@ -1,6 +1,6 @@
 ## About
 
-This is the repository for the Eleos front-end, it consists of two React applications.
+> This is the repository for the Eleos front-end, it consists of two React applications. Material-UI as visual framework and Material Table for the database table in the admin section.
 
 * a `server` app (`eleos-fronted-api` on AWS) which is built and deployed statically
 * a `client` app which is deployed on Electric Beanstalk
@@ -45,9 +45,33 @@ Use `npm start` the app in the development mode. Open [http://localhost:3000](h
 
 The page will reload if you make edits. You will also see any lint errors in the console.
 
+#### Credentials
+
+
+
+
+
+```
+export setenv jwtSecret=aba318899cb6a81ff9698733c21d5e61406964272c5b7efe1fdfc55db410bf35
+export setenv DEFAULT_ADMIN_PASSWORD=passwordpassword
+export setenv MPWD=Kaplan_12
+
+# Amazon Relational Database Service (Amazon RDS)
+# database: 'ebdb',
+export setenv RDS_USERNAME=
+export setenv RDS_PASSWORD=U5xD2BQqP-ayh&nq
+export setenv RDS_HOSTNAME=
+export setenv RDS_PORT=
+```
+
+  
+
 ### Testing
 
-`npm test` Launches the test runner in the interactive watch mode.<br />
+`npm test` Launches the test runner in the interactive watch mode.<br /> 
+
+Run this in the `eleos-frontend-api` folder
+
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### Deploying
