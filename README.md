@@ -33,13 +33,15 @@ This is the repository for the Eleos front-end, it consists of two React applica
 
 ## Getting Started
 
-### Prerequisites
+### :link: Prerequisites
 
 This project requires `npm`
 
 ### Running
 
-`npm start` the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+> Both the server and client app must be running at the same time
+
+Use `npm start` the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits. You will also see any lint errors in the console.
 
@@ -50,11 +52,9 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 ### Deploying
 
-`npm run build` bio;ds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+`npm run build` builds the app for production to the `build` folder.<br />
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+This must then be deployed on EB
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
