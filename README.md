@@ -19,17 +19,17 @@ This is the repository for the Eleos front-end, it consists of two React applica
         - App (css/js)
         - index (css/js)
 - src (server)
-        - api
-            - targetConfigs (loads the targetConfigs from local db)
-            - user (user config, middleware, etc)
-        - auth (api)
-        - dashboard (api)
-        - db (postgres connection with user / ppe_inventory. Called via api->users)
-        - tasks (createAdminUser.js - admin:seed)
-        - util (jwt (encryption) gen)
-        - app.js
-        - common.test.js
-        - index.js
+    - api
+        - targetConfigs (loads the targetConfigs from local db)
+        - user (user config, middleware, etc)
+    - auth (api)
+    - dashboard (api)
+    - db (postgres connection with user / ppe_inventory. Called via api->users)
+    - tasks (createAdminUser.js - admin:seed)
+    - util (jwt (encryption) gen)
+    - app.js
+    - common.test.js
+    - index.js
 
 ## Getting Started
 
