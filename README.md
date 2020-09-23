@@ -77,21 +77,20 @@ Run this in the `eleos-frontend-api` folder
 
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### Deploying
-
-
-- eleos-api --> eleos-api: ec2-user@35.178.210.66
+### 🚀 Deploying
 - eleos-frontend --> `npm run build` builds the app for production to the `build` folder --> deployed on S3
+- eleos-api --> eleos-api: ec2-user@35.178.210.66
 
+**eleos-frontend**
 Pushing the static files to the s3://eleosfrontend
 ```
-cd eleos-api-frontend
-brew install s3cmd
+brew install s3cmd  # Enter AWS credentials, use default settings for host / bucket.
 s3cmd --configure
-s3cmd sync build s3://eleosfrontend
- ```
+cd eleos-api-frontend
+npm run deploy # which runs npm run build && s3cmd sync build/* s3://eleosfrontend
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**eleos-api**
 
 ### Access
 
@@ -112,32 +111,26 @@ ssh -i ODOO.pem ubuntu@ec2-3-10-212-243.eu-west-2.compute.amazonaws.com
 #### Accessing Electric Beanstalk
 > ec2-user@35.177.42.131
 
-Navigate to https://scottishtecharmy.awsapps.com/start#/
-Set your AWS environmental variables
-
+**Set your AWS environmental variables** available at [https://scottishtecharmy.awsapps.com/start#/](scottishtecharmy.awsapps.com/start)
 ```
 export AWS_ACCESS_KEY_ID=""
 export AWS_SECRET_ACCESS_KEY=""
 export AWS_SESSION_TOKEN=""
 ```
 
-This needs to be repeated every [ ] hours as the keys are refreshed. 
+This needs to be repeated every 12 hours as the keys are refreshed. 
 
 ```
 cd eleos-frontend-api
 eb init -i
 ```
 
-**Region**
-```
-Select a default region
-...
-16) eu-west-2 : EU (London)
-...
-(default is 3): 16
-```
+**Platform**
+- **(16) eu-west-2 : EU (London)**
+- Node.js 12 running on 64bit Amazon Linux 2
 
-This must be set to **(16) eu-west-2 : EU (London)**
+
+This must be set to 
 
 **Application**
 ```
@@ -148,54 +141,11 @@ Select an application to use
 (default is 3): 1
 ```
 
-**Platform setup**
-```
-Select a platform.
-1) .NET Core on Linux
-2) .NET on Windows Server
-3) Docker
-4) GlassFish
-5) Go
-6) Java
-7) Node.js
-8) PHP
-9) Packer
-10) Python
-11) Ruby
-12) Tomcat
-(make a selection): 7
-
-Select a platform branch.
-1) Node.js 12 running on 64bit Amazon Linux 2
-2) Node.js 10 running on 64bit Amazon Linux 2
-3) Node.js running on 64bit Amazon Linux
-(default is 1): 1
-
-Cannot setup CodeCommit because there is no Source Control setup, 
-continuing with initialization
-Do you want to set up SSH for your instances?
-(Y/n): Y
-```
-**SSH**
-```
-Select a keypair.
-1) aws-eb
-2) eleos-frontend
-4) ODOODEVTEST
-5) [ Create new KeyPair ]
-(default is 4): 2
-```
-
 [ ] TODO: Centralised key-share? 
+# SSH
 
 ```
 ➜  eb ssh
-
-INFO: Running ssh -i /Users/pseudo/.ssh/mark-keypair ec2-user@35.178.210.66
-The authenticity of host '35.178.210.66 (35.178.210.66)' can't be established.
-ECDSA key fingerprint is SHA256:wYymmAjKKMKcrZ+AnuYiBQPaNSSFIG2d2pz5muFO1/I.
-Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-Warning: Permanently added '35.178.210.66' (ECDSA) to the list of known hosts.
   _____ _           _   _      ____                       _        _ _
  | ____| | __   ___| |_(_) ___| __ )  ___  __ _ _ __  ___| |_ __ _| | | __
  |  _| | |/ _ \/ __| __| |/ __|  _ \ / _ \/ _\ | '_ \/ __| __/ _\ | | |/ /
@@ -219,39 +169,3 @@ Warning: Permanently added '35.178.210.66' (ECDSA) to the list of known hosts.
 `npm i --s concurrently`
 `npm install cors --save`
 
-eugene.nazarovs@gmail.com
-passwordpassword
-
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
