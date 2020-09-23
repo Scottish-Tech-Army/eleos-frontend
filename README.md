@@ -2,40 +2,10 @@
 
 > This is the repository for the Eleos front-end, it consists of two React applications. Material-UI as visual framework and Material Table for the database table in the admin section.
 
-* a `server` app (`eleos-fronted-api` on AWS) which is built and deployed statically
+* a `server` app (`eleos-api` on AWS) which is built and deployed statically
 * a `client` app which is deployed on Electric Beanstalk
 
-### :open_file_folder: File Structure
-
-- client
-    - public (index.html, favicon, manifest.json, robots.txt, favicon)
-    - src 
-        - components
-            - admin
-            - customer
-            - Header.js
-        - images
-        - styles
-        - App (css/js)
-        - index (css/js)
-- src (server)
-    - api
-        - targetConfigs (loads the targetConfigs from local db)
-        - user (user config, middleware, etc)
-    - auth (api)
-    - dashboard (api)
-    - db (postgres connection with user / ppe_inventory. Called via api->users)
-    - tasks (createAdminUser.js - admin:seed)
-    - util (jwt (encryption) gen)
-    - app.js
-    - common.test.js
-    - index.js
-
 ## Getting Started
-
-### :link: Prerequisites
-
-This project requires `npm`
 
 ### Running
 
@@ -91,6 +61,10 @@ npm run deploy # which runs npm run build && s3cmd sync build/* s3://eleosfronte
 ```
 
 **eleos-api**
+```
+cd eleos-api
+eb deploy
+```
 
 ### Access
 
@@ -161,6 +135,33 @@ Select an application to use
 [ec2-user@ip-172-31-22-231 ~]$ pwd
 /home/ec2-user
 ```
+### :open_file_folder: File Structure
+
+- **eleos-api**
+    - api
+        - targetConfigs (loads the targetConfigs from local db)
+        - user (user config, middleware, etc)
+    - auth (api)
+    - dashboard (api)
+    - db (postgres connection with user / ppe_inventory. Called via api->users)
+    - tasks (createAdminUser.js - admin:seed)
+    - util (jwt (encryption) gen)
+    - app.js
+    - common.test.js
+    - index.js
+
+- **eleos-frontend**
+    - public (index.html, favicon, manifest.json, robots.txt, favicon)
+    - src 
+        - components
+            - admin
+            - customer
+            - Header.js
+        - images
+        - styles
+        - App (css/js)
+        - index (css/js)
+
 
 # Commands & Credentials
 
