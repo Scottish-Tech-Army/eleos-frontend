@@ -13,6 +13,8 @@
 
 Use `npm start` the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+http://eleosfrontend.s3-website.eu-north-1.amazonaws.com/
+
 ```
 eugene.nazarovs@gmail.com
 passwordpassword
@@ -21,7 +23,19 @@ passwordpassword
 The page will reload if you make edits. You will also see any lint errors in the console.
 
 #### Credentials
+> The credentials expire for AWS every 12 hours and must be constantly reset. 
 
+You can check your current credentials with;
+```
+echo $AWS_ACCESS_KEY_ID 
+echo $AWS_SECRET_ACCESS_KEY 
+echo $AWS_SESSION_TOKEN
+```
+
+Other places credentials are saved are
+```
+aws configure
+vi ~/.
 > The databases for Eleos are configured within the AWS Management console at `Elastic Beanstalk -> Configuration -> Database`
 ```
 export setenv jwtSecret=aba318899cb6a81ff9698733c21d5e61406964272c5b7efe1fdfc55db410bf35
@@ -48,8 +62,8 @@ Run this in the `eleos-frontend-api` folder
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### 🚀 Deploying
-- eleos-frontend --> `npm run build` builds the app for production to the `build` folder --> deployed on S3
-- eleos-api --> eleos-api: ec2-user@35.178.210.66
+- cd eleos-frontend --> `npm run build` builds the app for production to the `build` folder --> deployed on S3
+- cd eleos-api --> eb deploy --> eleos-api: ec2-user@35.178.210.66
 
 **eleos-frontend**
 Pushing the static files to the s3://eleosfrontend

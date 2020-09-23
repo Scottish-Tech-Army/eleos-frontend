@@ -21,7 +21,7 @@ const Dashboard = ({ setAuth }) => {
 
   async function getUserDetails() {
     try {
-      const response = await fetch('http://localhost:5000/dashboard/', {
+      const response = await fetch('http://eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com/dashboard/', {
         method: 'GET',
         headers: { token: localStorage.token },
       });

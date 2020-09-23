@@ -24,7 +24,7 @@ const DeleteUserDialog = ({
     e.preventDefault();
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:5000/users/${user_id}`, {
+      const response = await fetch(`http://eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com/users/${user_id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

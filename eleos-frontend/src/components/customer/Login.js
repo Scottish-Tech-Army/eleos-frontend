@@ -35,7 +35,7 @@ const Login = ({ setAuth }) => {
     try {
       const body = { admin_email, admin_password };
 
-      const response = await fetch('http://localhost:5000/auth/login', {
+      const response = await fetch('http://eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),

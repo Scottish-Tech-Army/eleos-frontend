@@ -49,7 +49,7 @@ function App() {
 
   async function isAuth() {
     try {
-      const response = await fetch('http://localhost:5000/auth/is-verify', {
+      const response = await fetch('http://eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com/auth/is-verify', {
         method: 'GET',
         headers: { token: localStorage.token },
       });
