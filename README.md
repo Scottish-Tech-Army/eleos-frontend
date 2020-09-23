@@ -28,8 +28,8 @@
 # Amazon Relational Database Service (Amazon RDS)
 # database: 'ebdb'
 export setenv RDS_USERNAME=dbuser
-export setenv RDS_PASSWORD='U5xD2BQqP-ayh&nq'
-export setenv RDS_HOSTNAME='aaharaujhpjxt7.cqrta6bb4sbn.eu-west-2.rds.amazonaws.com'
+export setenv RDS_PASSWORD='pastecry.pt/4J3Lrq' @Mark Glasgow on STA slack for access
+export setenv RDS_HOSTNAME='pastecry.pt/4J3Lrq' @Mark Glasgow on STA slack for access
 export setenv RDS_PORT=5432
 npm start
 ```
@@ -79,6 +79,7 @@ eb deploy
 ```
 ssh -i ODOO.pem ubuntu@ec2-3-10-212-243.eu-west-2.compute.amazonaws.com
 ```
+ODOO.pem - https://pastecry.pt/mIvloO - @Mark Glasgow on STA slack for access
 
 **Accessing the S3 instance**
 ```
