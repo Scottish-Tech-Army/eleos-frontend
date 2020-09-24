@@ -6,10 +6,16 @@
 * a `server` app (`eleos-api`) which is deployed on Electric Beanstalk
 
 ### URLS
-* **Test** EC2: [ec2-3-10-212-243.eu-west-2.compute.amazonaws.com](http://ec2-3-10-212-243.eu-west-2.compute.amazonaws.com/), [Database manager](http://ec2-3-10-212-243.eu-west-2.compute.amazonaws.com/web/database/manager)
-* **Dev** EC2: [ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/](http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/)
-* eleos-frontend S3: http://eleosfrontend.s3-website.eu-north-1.amazonaws.com/ (eugene.nazarovs@gmail.com : passwordpassword) & [https://eleos.scottishtecharmy.org](eleos.scottishtecharmy.org)
-* eleos-api EB + S3: [http://eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com/](eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com) 
+* EC2 (Odoo back-end)
+  * **Test**  [ec2-3-10-212-243.eu-west-2.compute.amazonaws.com](http://ec2-3-10-212-243.eu-west-2.compute.amazonaws.com/), [db manager](http://ec2-3-10-212-243.eu-west-2.compute.amazonaws.com/web/database/manager)
+  * **Dev** [ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/](http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/)
+* eleos-api EB + S3: 
+  * [http://eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com/](eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com) 
+* eleos-frontend S3: 
+  * [http://eleosfrontend.s3-website.eu-north-1.amazonaws.com/](eleosfrontend.s3-website.eu-north-1.amazonaws.com/) 
+  * (eugene.nazarovs@gmail.com : passwordpassword)  
+  * [https://eleos.scottishtecharmy.org](eleos.scottishtecharmy.org)
+
 
 
 - [ ] TODO: Centralised key-share? 
@@ -24,17 +30,17 @@
 * eb
 * s3cmd
 
-**Platform**
-- **(16) eu-west-2 : EU (London)**
+If you need to use `eb init`, the following settings must be selected
+- (16) **eu-west-2** : EU (London)
 - Node.js 12 running on 64bit Amazon Linux 2
 
 ### Credentials
+#### Amazon Relational Database Service (Amazon RDS)
 **Static**
 
 > The databases for Eleos are configured within the AWS Management console at `Elastic Beanstalk -> Configuration -> Database`
 
 ```
-# Amazon Relational Database Service (Amazon RDS)
 # database: 'ebdb'
 export setenv RDS_USERNAME=dbuser
 export setenv RDS_PASSWORD='pastecry.pt/4J3Lrq' @Mark Glasgow on STA slack for access
@@ -45,7 +51,6 @@ npm start
 
 **Dynamic**
 > The credentials expire for AWS every 12 hours and must be constantly reset. 
-
 
 Environmental variables may be saved in the following locations and need updated
 ```
@@ -67,8 +72,10 @@ npm test
 - cd eleos-api --> eb deploy --> eleos-api: ec2-user@35.178.210.66
 
 **eleos-frontend**
-Pushing the static files to s3://eleosfrontend
+>[https://eleos.scottishtecharmy.org](eleos.scottishtecharmy.org)
+
 ```
+# Pushing the static files to s3://eleosfrontend
 brew install s3cmd  # Enter AWS credentials, use default settings for host / bucket.
 s3cmd --configure
 cd eleos-api-frontend
@@ -83,7 +90,6 @@ eb deploy
 
 ## Access
 
-
 **Accessing E2**
 
 ```
@@ -92,8 +98,6 @@ ssh -i ODOO.pem ubuntu@ec2-35-178-199-156.eu-west-2.compute.amazonaws.com
 >ODOO.pem - https://pastecry.pt/mIvloO - @Mark Glasgow on STA slack for access
 
 **Accessing the S3 instance**
-Once aws is installed and configured, we can see the S3 buckets using `ls`
-
 ```
 ➜  aws s3 ls
 2020-09-15 09:25:10 elasticbeanstalk-eu-west-1-677304537696
@@ -102,16 +106,11 @@ Once aws is installed and configured, we can see the S3 buckets using `ls`
 
 #### Accessing Electric Beanstalk
 > ec2-user@35.177.42.131
-Once eb is installed and configured, we can utilise the `eb` command
-
 
 ```
 cd eleos-frontend-api
 eb status
 ```
-
-
-
 
 # SSH
 
@@ -125,12 +124,7 @@ eb status
 
  Amazon Linux 2 AMI
 
- This EC2 instance is managed by AWS Elastic Beanstalk. Changes made via SSH
- WILL BE LOST if the instance is replaced by auto-scaling. For more information
- on customizing your Elastic Beanstalk environment, see our documentation here:
- http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/customize-containers-ec2.html
-[ec2-user@ip-172-31-22-231 ~]$ pwd
-/home/ec2-user
+ This EC2 instance...
 ```
 
 ## :open_file_folder: File Structure
@@ -163,8 +157,8 @@ eb status
 
 # 📝 Notes
 
-`node seed:admin` runs `node src/tasks/createAdminUser.js`
-`INSERT INTO target_config (target_id, description) VALUES (1,'test');`
-`npm i --s concurrently`
-`npm install cors --save`
+* `node seed:admin` runs `node src/tasks/createAdminUser.js`
+* `INSERT INTO target_config (target_id, description) VALUES (1,'test');`
+* `npm i --s concurrently`
+* `npm install cors --save`
 
