@@ -1,0 +1,20 @@
+<RoutingRules>
+  <RoutingRule>
+    <Condition>
+      <HttpErrorCodeReturnedEquals>404</HttpErrorCodeReturnedEquals>
+    </Condition>
+    <Redirect>
+      <HostName>eleosfrontend.s3-website.eu-north-1.amazonaws.com</HostName>
+      <ReplaceKeyPrefixWith>#!/</ReplaceKeyPrefixWith>
+    </Redirect>
+  </RoutingRule>
+  <RoutingRule>
+    <Condition>
+      <HttpErrorCodeReturnedEquals>403</HttpErrorCodeReturnedEquals>
+    </Condition>
+    <Redirect>
+      <HostName>eleosfrontend.s3-website.eu-north-1.amazonaws.com</HostName>
+      <ReplaceKeyPrefixWith>#!/</ReplaceKeyPrefixWith>
+    </Redirect>
+  </RoutingRule>
+</RoutingRules>

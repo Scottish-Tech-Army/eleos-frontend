@@ -51,8 +51,10 @@ npm start
 
 Environmental variables may be saved in the following locations and need updated
 ```
+rm ~/.aws/credentials
+rm ~/.s3cfg
 aws configure
-vi ~/.s3cfg
+s3cmd --configure
 echo $AWS_ACCESS_KEY_ID 
 echo $AWS_SECRET_ACCESS_KEY 
 echo $AWS_SESSION_TOKEN
@@ -76,6 +78,7 @@ npm test
 ```
 # Pushing the static files to s3://eleosfrontend
 brew install s3cmd  # Enter AWS credentials, use default settings for host / bucket.
+rm ~/.s3cfg
 s3cmd --configure
 cd eleos-api-frontend
 npm run deploy # which runs npm run build && s3cmd sync build/* s3://eleosfrontend
@@ -87,13 +90,16 @@ cd eleos-api
 eb deploy
 ```
 
-## 🚪 Access
+## 🚪 Direct Access
 
 **Accessing E2**
 >ODOO.pem RSA stored on [AWS Secret Manager](https://eu-west-2.console.aws.amazon.com/secretsmanager/home?region=eu-west-2#/listSecrets)
 
 ```
+# Odoo-dev
 ssh -i ODOO.pem ubuntu@ec2-35-178-199-156.eu-west-2.compute.amazonaws.com
+# Odoo-test
+ssh -i ODOO.pem ubuntu@ec2-3-10-212-243.eu-west-2.compute.amazonaws.com
 ```
 
 **Accessing the S3 bucket**
