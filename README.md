@@ -35,7 +35,7 @@ If you need to use `eb init`, the following settings must be selected
 - (16) **eu-west-2** : EU (London)
 - Node.js 12 running on 64bit Amazon Linux 2
 
-### Credentials
+### 🔐 Credentials
 
 The credentials for the database can be retrieved from [AWS Secret Manager](https://eu-west-2.console.aws.amazon.com/secretsmanager/home?region=eu-west-2#/listSecrets)
 
@@ -66,7 +66,7 @@ echo $AWS_SECRET_ACCESS_KEY
 echo $AWS_SESSION_TOKEN
 ```
 
-### Testing
+### 🕵️‍♂️ Testing
 ```
 cd eleos-frontend-api
 npm test
@@ -93,14 +93,14 @@ cd eleos-api
 eb deploy
 ```
 
-## Access
+## 🚪 Access
 
 **Accessing E2**
+>ODOO.pem RSA stored on AWS Secret Manager
 
 ```
 ssh -i ODOO.pem ubuntu@ec2-35-178-199-156.eu-west-2.compute.amazonaws.com
 ```
->ODOO.pem - https://pastecry.pt/mIvloO - @Mark Glasgow on STA slack for access
 
 **Accessing the S3 instance**
 ```
@@ -115,21 +115,7 @@ ssh -i ODOO.pem ubuntu@ec2-35-178-199-156.eu-west-2.compute.amazonaws.com
 ```
 cd eleos-frontend-api
 eb status
-```
-
-# SSH
-
-```
-➜  eb ssh
-  _____ _           _   _      ____                       _        _ _
- | ____| | __   ___| |_(_) ___| __ )  ___  __ _ _ __  ___| |_ __ _| | | __
- |  _| | |/ _ \/ __| __| |/ __|  _ \ / _ \/ _\ | '_ \/ __| __/ _\ | | |/ /
- | |___| | (_| \__ \ |_| | (__| |_) |  __/ (_| | | | \__ \ || (_| | |   <
- |_____|_|\__,_|___/\__|_|\___|____/ \___|\__,_|_| |_|___/\__\__,_|_|_|\_\
-
- Amazon Linux 2 AMI
-
- This EC2 instance...
+eb ssh
 ```
 
 ## :open_file_folder: File Structure
