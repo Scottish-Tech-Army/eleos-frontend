@@ -6,13 +6,10 @@
 * a `server` app (`eleos-api`) which is deployed on Electric Beanstalk
 
 ### 📌 Bookmarks
-* EC2 (Odoo back-end)
-  * [test ec2](http://ec2-3-10-212-243.eu-west-2.compute.amazonaws.com/), [test ec2 db manager](http://ec2-3-10-212-243.eu-west-2.compute.amazonaws.com/web/database/manager),[dev ec2](http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/)
-* eleos-api (EB + S3): [eleos-api.scottishtecharmy.com/](eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com) 
-* eleos-frontend (static S3): [eleos.scottishtecharmy.org](eleos.scottishtecharmy.org), [eleosfrontend.s3](eleosfrontend.s3-website.eu-north-1.amazonaws.com/) 
-  * (eugene.nazarovs@gmail.com : passwordpassword)  
+* EC2 (Odoo back-end): [dev ec2](http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/)
+* eleos-api (EB + S3): [eleos-api.scottishtecharmy.com/](https://eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com) 
+* eleos-frontend (static S3): [eleos.scottishtecharmy.org](https://eleos.scottishtecharmy.org), [S3: eleosfrontend.s3](eleosfrontend.s3-website.eu-north-1.amazonaws.com/) 
 * [AWS Secret Manager](https://eu-west-2.console.aws.amazon.com/secretsmanager/home?region=eu-west-2#/listSecrets)
-
 
 **TODO**
 - [x] Build and push changes to both frontend and api to test
@@ -31,14 +28,9 @@
 * eb
 * s3cmd
 
-If you need to use `eb init`, the following settings must be selected
-- (16) **eu-west-2** : EU (London)
-- Node.js 12 running on 64bit Amazon Linux 2
-
 ### 🔐 Credentials
 
 The credentials for the database can be retrieved from [AWS Secret Manager](https://eu-west-2.console.aws.amazon.com/secretsmanager/home?region=eu-west-2#/listSecrets)
-
 
 #### Amazon Relational Database Service (Amazon RDS)
 **Static**
@@ -66,7 +58,9 @@ echo $AWS_SECRET_ACCESS_KEY
 echo $AWS_SESSION_TOKEN
 ```
 
-### 🕵️‍♂️ Testing
+## 🕵️‍♂️ Testing
+ * [test ec2](http://ec2-3-10-212-243.eu-west-2.compute.amazonaws.com/), [test ec2 db manager](http://ec2-3-10-212-243.eu-west-2.compute.amazonaws.com/web/database/manager),
+
 ```
 cd eleos-frontend-api
 npm test
@@ -96,13 +90,14 @@ eb deploy
 ## 🚪 Access
 
 **Accessing E2**
->ODOO.pem RSA stored on AWS Secret Manager
+>ODOO.pem RSA stored on [AWS Secret Manager](https://eu-west-2.console.aws.amazon.com/secretsmanager/home?region=eu-west-2#/listSecrets)
 
 ```
 ssh -i ODOO.pem ubuntu@ec2-35-178-199-156.eu-west-2.compute.amazonaws.com
 ```
 
-**Accessing the S3 instance**
+**Accessing the S3 bucket**
+>[S3: eleosfrontend.s3](eleosfrontend.s3-website.eu-north-1.amazonaws.com/) 
 ```
 ➜  aws s3 ls
 2020-09-15 09:25:10 elasticbeanstalk-eu-west-1-677304537696
@@ -153,3 +148,6 @@ eb ssh
 * `npm i --s concurrently`
 * `npm install cors --save`
 
+If you need to use `eb init`, the following settings must be selected
+- (16) **eu-west-2** : EU (London)
+- Node.js 12 running on 64bit Amazon Linux 2
