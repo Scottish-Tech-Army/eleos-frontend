@@ -1,28 +1,37 @@
 ## About
 
-> This is the repository for the Eleos front-end, it consists of two React applications. Material-UI as visual framework and Material Table for the database table in the admin section.
+> This is the repository for the Eleos front-end, it consists of two React applications. Material-UI as visual framework and Material Table for the database table in the admin section. [YouTube : STA Front End/DB Walk Through](https://www.youtube.com/watch?v=6pwdsKymUD4&feature=youtu.be)
 
 * a `client` app (`eleos-frontend`) which is built and deployed statically
-  * http://eleosfrontend.s3-website.eu-north-1.amazonaws.com/ (eugene.nazarovs@gmail.com : passwordpassword)
 * a `server` app (`eleos-api`) which is deployed on Electric Beanstalk
-  * http://eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com/
+
+### URLS
+* **Test** EC2: [ec2-3-10-212-243.eu-west-2.compute.amazonaws.com](http://ec2-3-10-212-243.eu-west-2.compute.amazonaws.com/), [Database manager](http://ec2-3-10-212-243.eu-west-2.compute.amazonaws.com/web/database/manager)
+* **Dev** EC2: [ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/](http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/)
+* eleos-frontend S3: http://eleosfrontend.s3-website.eu-north-1.amazonaws.com/ (eugene.nazarovs@gmail.com : passwordpassword) & [https://eleos.scottishtecharmy.org](eleos.scottishtecharmy.org)
+* eleos-api EB + S3: [http://eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com/](eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com) 
+
 
 - [ ] TODO: Centralised key-share? 
 
 ## Getting Started
 
 ### Prereq
+>These should all be relatively self explanatory to install but will depend on platform. The only options that need entered are your personal security tokens from [AWS](https://scottishtecharmy.awsapps.com/start/).
+
 * aws
 * npm
 * eb
 * s3cmd
 
+**Platform**
+- **(16) eu-west-2 : EU (London)**
+- Node.js 12 running on 64bit Amazon Linux 2
+
 ### Credentials
 **Static**
 
 > The databases for Eleos are configured within the AWS Management console at `Elastic Beanstalk -> Configuration -> Database`
-
-[EC2 Database manager (243)](http://ec2-3-10-212-243.eu-west-2.compute.amazonaws.com/web/database/manager)
 
 ```
 # Amazon Relational Database Service (Amazon RDS)
@@ -58,7 +67,7 @@ npm test
 - cd eleos-api --> eb deploy --> eleos-api: ec2-user@35.178.210.66
 
 **eleos-frontend**
-Pushing the static files to the s3://eleosfrontend
+Pushing the static files to s3://eleosfrontend
 ```
 brew install s3cmd  # Enter AWS credentials, use default settings for host / bucket.
 s3cmd --configure
@@ -74,31 +83,34 @@ eb deploy
 
 ## Access
 
+
 **Accessing E2**
 
 ```
-ssh -i ODOO.pem ubuntu@ec2-3-10-212-243.eu-west-2.compute.amazonaws.com
+ssh -i ODOO.pem ubuntu@ec2-35-178-199-156.eu-west-2.compute.amazonaws.com
 ```
-ODOO.pem - https://pastecry.pt/mIvloO - @Mark Glasgow on STA slack for access
+>ODOO.pem - https://pastecry.pt/mIvloO - @Mark Glasgow on STA slack for access
 
 **Accessing the S3 instance**
+Once aws is installed and configured, we can see the S3 buckets using `ls`
+
 ```
 ➜  aws s3 ls
 2020-09-15 09:25:10 elasticbeanstalk-eu-west-1-677304537696
-2020-08-30 19:28:39 elasticbeanstalk-eu-west-2-677304537696
 2020-08-11 06:23:44 eleosfrontend
 ```
 
 #### Accessing Electric Beanstalk
 > ec2-user@35.177.42.131
+Once eb is installed and configured, we can utilise the `eb` command
+
+
 ```
 cd eleos-frontend-api
 eb status
 ```
 
-**Platform**
-- **(16) eu-west-2 : EU (London)**
-- Node.js 12 running on 64bit Amazon Linux 2
+
 
 
 # SSH
