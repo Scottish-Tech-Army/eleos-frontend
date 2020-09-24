@@ -5,20 +5,21 @@
 * a `client` app (`eleos-frontend`) which is built and deployed statically
 * a `server` app (`eleos-api`) which is deployed on Electric Beanstalk
 
-### URLS
+### 📌 Bookmarks
 * EC2 (Odoo back-end)
-  * **Test**  [ec2-3-10-212-243.eu-west-2.compute.amazonaws.com](http://ec2-3-10-212-243.eu-west-2.compute.amazonaws.com/), [db manager](http://ec2-3-10-212-243.eu-west-2.compute.amazonaws.com/web/database/manager)
-  * **Dev** [ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/](http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/)
-* eleos-api EB + S3: 
-  * [http://eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com/](eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com) 
-* eleos-frontend S3: 
-  * [http://eleosfrontend.s3-website.eu-north-1.amazonaws.com/](eleosfrontend.s3-website.eu-north-1.amazonaws.com/) 
+  * [test ec2](http://ec2-3-10-212-243.eu-west-2.compute.amazonaws.com/), [test ec2 db manager](http://ec2-3-10-212-243.eu-west-2.compute.amazonaws.com/web/database/manager),[dev ec2](http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/)
+* eleos-api (EB + S3): [eleos-api.scottishtecharmy.com/](eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com) 
+* eleos-frontend (static S3): [eleos.scottishtecharmy.org](eleos.scottishtecharmy.org), [eleosfrontend.s3](eleosfrontend.s3-website.eu-north-1.amazonaws.com/) 
   * (eugene.nazarovs@gmail.com : passwordpassword)  
-  * [https://eleos.scottishtecharmy.org](eleos.scottishtecharmy.org)
+* [AWS Secret Manager](https://eu-west-2.console.aws.amazon.com/secretsmanager/home?region=eu-west-2#/listSecrets)
 
 
-
-- [ ] TODO: Centralised key-share? 
+**TODO**
+- [x] Build and push changes to both frontend and api to test
+- [x] Centralised key-share?
+- [ ] Test database
+- [ ] dbfilter_from_header
+- [ ] target config
 
 ## Getting Started
 
@@ -35,6 +36,10 @@ If you need to use `eb init`, the following settings must be selected
 - Node.js 12 running on 64bit Amazon Linux 2
 
 ### Credentials
+
+The credentials for the database can be retrieved from [AWS Secret Manager](https://eu-west-2.console.aws.amazon.com/secretsmanager/home?region=eu-west-2#/listSecrets)
+
+
 #### Amazon Relational Database Service (Amazon RDS)
 **Static**
 
@@ -43,8 +48,8 @@ If you need to use `eb init`, the following settings must be selected
 ```
 # database: 'ebdb'
 export setenv RDS_USERNAME=dbuser
-export setenv RDS_PASSWORD='pastecry.pt/4J3Lrq' @Mark Glasgow on STA slack for access
-export setenv RDS_HOSTNAME='pastecry.pt/4J3Lrq' @Mark Glasgow on STA slack for access
+export setenv RDS_PASSWORD='' 
+export setenv RDS_HOSTNAME=''
 export setenv RDS_PORT=5432
 npm start
 ```
