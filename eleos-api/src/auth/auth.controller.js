@@ -70,7 +70,7 @@ const register = async (req, res, next) => {
       * DEV DB : ec2-35-178-199-156
       * */ 
     const response = await fetch(
-      'http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web/database/create',
+      'http://ec2-3-10-212-243.eu-west-2.compute.amazonaws.com/web/database/create',
       {
         method: 'POST',
         body: fd,

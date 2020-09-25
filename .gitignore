@@ -25,3 +25,4 @@ yarn-debug.log*
 yarn-error.log*
 configure_env.sh
 sh/check_credentials.sh
+sh/deploy.sh

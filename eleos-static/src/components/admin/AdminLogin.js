@@ -14,6 +14,9 @@ import Box from '@material-ui/core/Box';
 import avatarLogo from '../../images/STAminilogo.jpg';
 import { useStyles } from '../../styles/AdminLoginStyles';
 
+import { Link as RouterLink } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
+
 
 const AdminLogin = ({ setAuth }) => {
   const classes = useStyles();
@@ -115,6 +118,13 @@ const AdminLogin = ({ setAuth }) => {
             >
               Log In
             </Button>
+            <Grid container justify='flex-end'>
+              <Grid item>
+                <Link component={RouterLink} to='/login' variant='body2'>
+                  Don't have an account? Sign up
+                </Link>
+              </Grid>
+            </Grid>
           </form>
         </div>
       </Paper>
