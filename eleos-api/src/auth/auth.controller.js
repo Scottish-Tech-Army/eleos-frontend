@@ -25,7 +25,7 @@ const createTokenSendResponse = ({ user_id, role = 'customer' }, res, next) => {
     payload,
     process.env.jwtSecret,
     {
-      expiresIn: '1h',
+      expiresIn: '12h',
     },
     (err, token) => {
       if (err) {
@@ -64,7 +64,11 @@ const register = async (req, res, next) => {
     fd.append('phone', admin_phone);
     fd.append('lang', 'en_GB');
     fd.append('country_code', 'gb');
-
+      /*
+      *
+      * TEST DB : ec2-3-10-212-243
+      * DEV DB : ec2-35-178-199-156
+      * */ 
     const response = await fetch(
       'http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web/database/create',
       {

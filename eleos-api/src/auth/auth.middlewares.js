@@ -73,7 +73,7 @@ const isAuthorised = () => async (req, res, next) => {
         (error, user) => {
           if (error) {
             res.status(403);
-            next(new Error('Not Authorise'));
+            next(new Error('Not Authorised'));
           }
 
           req.user = user;

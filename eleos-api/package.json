@@ -7,9 +7,11 @@
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "seed:admin": "node src/tasks/createAdminUser.js",
+    "seed:config": "node src/tasks/createTargetConfig.js",
     "lint": "eslint src/",
     "test": "mocha src/*.test.js src/**/*.test.js src/**/**/*.test.js --watch",
-    "install": "find ./node_modules/* -mtime +10950 -exec touch {} \\;"
+    "install": "find ./node_modules/* -mtime +10950 -exec touch {} \\;",
+    "deploy": "eb deploy && echo '🚀  API Deployed!'"
   },
   "keywords": [],
   "author": "",

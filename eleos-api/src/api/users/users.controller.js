@@ -74,7 +74,11 @@ const deleteUser = async (req, res, next) => {
 
     fd.append('master_pwd', process.env.MPWD);
     fd.append('name', name);
-
+      /*
+      *
+      * TEST DB: ec2-3-10-212-243
+      * DEV DB : ec2-35-178-199-156
+      * */ 
     await fetch(
       'http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web/database/drop',
       {

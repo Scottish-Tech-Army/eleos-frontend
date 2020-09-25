@@ -14,6 +14,7 @@ import Box from '@material-ui/core/Box';
 import avatarLogo from '../../images/STAminilogo.jpg';
 import { useStyles } from '../../styles/AdminLoginStyles';
 
+
 const AdminLogin = ({ setAuth }) => {
   const classes = useStyles();
   const [inputs, setInputs] = useState({
