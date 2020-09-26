@@ -102,6 +102,10 @@ cd eleos-api
 eb deploy
 ```
 
+If you need to use `eb init`, the following settings must be selected
+- (16) **eu-west-2** : EU (London)
+- Node.js 12 running on 64bit Amazon Linux 2
+
 ## 🚪 Direct Access
 
 **Accessing E2**
@@ -159,14 +163,15 @@ eb ssh
         - index (css/js)
 
 
-# 📝 Notes
+## 📝 Scripts
 
-* `node seed:admin` runs `node src/tasks/createAdminUser.js`
-* `INSERT INTO target_config (target_id, description) VALUES (1,'test');`
+### Populates target_config if needed
+> npm run seed:config
+> `node seed:admin` runs `node src/tasks/createAdminUser.js`
+
+### concurrently
+
 * `npm i --s concurrently`
 * `npm install cors --save`
-* npm run seed:config
 
-If you need to use `eb init`, the following settings must be selected
-- (16) **eu-west-2** : EU (London)
-- Node.js 12 running on 64bit Amazon Linux 2
+

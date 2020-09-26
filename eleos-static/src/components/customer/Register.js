@@ -84,7 +84,7 @@ const Register = ({ setAuth }) => {
 
   const getAllConfig = async () => {
     try {
-      const response = await fetch('/targetconfig', {
+      const response = await fetch('http://eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com/targetconfig', {
         method: 'GET',
       });
 

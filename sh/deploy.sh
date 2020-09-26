@@ -1,6 +1,7 @@
+./sh/check_credentials.sh
 # API 
 echo "Deploying API"
-cd ..
+# cd ..
 cd eleos-api
 
 # Populates target_config if needed

@@ -1,3 +1,8 @@
+# Static Routing
+
+
+
+```
 <RoutingRules>
   <RoutingRule>
     <Condition>
@@ -18,3 +23,19 @@
     </Redirect>
   </RoutingRule>
 </RoutingRules>
+```
+
+This is used in conjunction with the code in eleos-static/index.js which performs the URL rewrite, removing /#!/
+
+```
+import { render } from "react-dom";
+// Browser History API
+import { createBrowserHistory } from "history";
+// added <Router>, might be superflous. 
+// URL Rewriting
+const history = createBrowserHistory();
+const path = (/#!(\/.*)$/.exec(window.location.hash) || [])[1];
+    if (path) {
+      history.replace(path);
+    }
+```
