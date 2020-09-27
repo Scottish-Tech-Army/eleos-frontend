@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^7.2.1",
     "aws-sdk": "^2.760.0",
     "axios": "^0.20.0",
+    "browser-cookies": "^1.2.0",
     "concurrently": "^5.3.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",

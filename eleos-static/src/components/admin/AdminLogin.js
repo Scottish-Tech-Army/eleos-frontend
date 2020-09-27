@@ -121,7 +121,7 @@ const AdminLogin = ({ setAuth }) => {
             <Grid container justify='flex-end'>
               <Grid item>
                 <Link component={RouterLink} to='/login' variant='body2'>
-                  Don't have an account? Sign up
+                  Looking for customer login ? 
                 </Link>
               </Grid>
             </Grid>

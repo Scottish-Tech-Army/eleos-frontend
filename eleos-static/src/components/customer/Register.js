@@ -22,6 +22,12 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { useStyles } from '../../styles/RegisterStyles';
 import avatarLogo from '../../images/STAminilogo.jpg';
 
+/**
+ * 
+ * 
+ * 
+ * 
+ */
 const Register = ({ setAuth }) => {
   const [allConfig, setAllConfig] = useState([]);
   const [loading, setLoading] = useState(false);

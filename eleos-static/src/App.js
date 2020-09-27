@@ -40,15 +40,17 @@ const styles = () => ({
 });
 
 function App() {
-  /* Auth */
+  
+  /**
+   * Auth check
+   */
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
   const setAuth = (boolean) => {
     setIsAuthenticated(boolean);
   };
-
-  /* Auth check */
+  
   async function isAuth() {
     try {
       const response = await fetch(
@@ -72,9 +74,9 @@ function App() {
   useEffect(() => {
     isAuth();
   });
-  // A bunch of rules which do things like
-  // If logged and user visits /login, 
-  // redirect them to /dashboard
+  /*
+  * Routing / Redirection
+  */ 
   return (
     <>
       <Header
@@ -92,7 +94,7 @@ function App() {
                 !isAuthenticated ? (
                   <AdminLogin {...props} setAuth={setAuth} />
                 ) : (
-                  <Redirect to="/admin" />
+                  <Redirect to="/login" />
                 )
               }
             />
