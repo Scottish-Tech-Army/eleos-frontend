@@ -4,8 +4,9 @@
 eleos-api/src/auth
 
 * DEV DB : ec2-35-178-199-156
-  - Set to Kap* password
+  - password: Kap* 
 * TEST DB: ec2-3-10-212-243
+  - password: starts S and ends $ 
 
 
 user.controller.js

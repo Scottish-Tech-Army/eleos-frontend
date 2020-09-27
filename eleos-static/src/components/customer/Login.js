@@ -16,6 +16,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
 import avatarLogo from '../../images/STAminilogo.jpg';
 import { useStyles } from '../../styles/LoginStyles';
+import axios from "axios";
 
 const Login = ({ setAuth }) => {
   const classes = useStyles();
@@ -49,7 +50,30 @@ const Login = ({ setAuth }) => {
         localStorage.setItem('token', parseRes.token);
 
         setAuth(true);
-        toast.success('login successfully!');
+        toast.success('login successful!');
+        // Attempt at passing header
+        /*
+        axios.request({
+          url: 'http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/',
+          method: 'post',
+          headers: { 'X-Odoo-dbfilter': 'data', "X-CSRFToken": 'token' }
+        })
+        
+        //window.location.href = 'http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com'; 
+*/
+        var req = new XMLHttpRequest();
+        req.open('GET', 'http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com', true); //true means request will be async
+        req.onreadystatechange = function (aEvt) {
+          if (req.readyState == 4) {
+            if(req.status == 200)
+              document.write(req.responseText);
+            else
+              alert("Error loading page\n");
+          }
+        };
+        req.setRequestHeader('X-Odoo-dbfilter', 'data');
+        req.send();
+       
       } else {
         setAuth(false);
         toast.error(parseRes.message);

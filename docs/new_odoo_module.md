@@ -1,3 +1,15 @@
+# 
+ssh -i ODOO.pem ubuntu@ec2-35-178-199-156.eu-west-2.compute.amazonaws.com
+
+* scp [source file] [username]@[destination server]:.
+* scp -vvv -i ODOO.pem muk_dbfilter-13.0.1.0.0.zip ubuntu@ec2-35-178-199-156.eu-west-2.compute.amazonaws.com
+
+* install `base_import_module`
+* /web?debug=1
+* `Import Module` 
+
+`/var/lib/odoo/.local/share/Odoo/addons` as root
+
 # Upload and installing a custom Odoo module
 > Brian Jackson 17/9/2020
 > These notes are for installing a custom module.  In this case for uploading multiple product images displayed in the Inventory Module and the Website Module.  Without this, each image has to be loaded one at a time. This process needs to be included in the setup scripts run after initial database creation for each customer. The module 'product_image_upload' has been purchased from www.appjetty.com
