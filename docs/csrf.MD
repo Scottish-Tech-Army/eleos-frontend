@@ -1,12 +1,31 @@
-getting all the required data, 
-putting it in the format that Odoo expects (FormData), 
-hitting the required route
+
+# Database
+> Retrieving the database name by mimicing the Odoo login process from STA’s front end 
+
+
+
+
+* so form input will include 
+
+
 
 ## Retrieving CSRF
 
-* Match email with the name of the database in the backend 
-* GET http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web?db=data
-* parse response as .text() to get raw html
+* Dashboard.js - 'Proceed to instance' button
+1. Get `database` name
+   * Match email with the name of the `database` via eleos-api
+2. Get `csrf_token`
+   * GET http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web?db=`database`
+   * parse response as .text() to get raw html
+3. Redirect
+   * send a post request to log in providing form details as per Odoo FormData (csrf_token, login, and password and ‘db’)
+
+### 1
+Database is pulling and displaying via console.log
+
+### 2
+
+document.getElementById("myLink").innerHTML=csrf_token;
 
 the crsf_token is included in the raw :
 ```
@@ -39,11 +58,3 @@ Full response
                 </div>
 ```
 
-# Database
-> Retrieving the database name by mimicing the Odoo login process from STA’s front end 
-
-
-* send a post request to log in providing form details as per their requirements:
-
-
-* so form input will include csrf_token, login, and password and ‘db’

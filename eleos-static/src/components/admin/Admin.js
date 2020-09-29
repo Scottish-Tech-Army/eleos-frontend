@@ -10,7 +10,7 @@ const Admin = () => {
 
   const getAllUsers = async () => {
     try {
-      const response = await fetch('http://eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com/users', {
+      const response = await fetch('http://eleos-api.scottishtecharmy.org/users', {
         method: 'GET',
         headers: { token: localStorage.token },
       });
@@ -25,7 +25,7 @@ const Admin = () => {
 
   const getAllConfig = async () => {
     try {
-      const response = await fetch('http://eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com/targetconfig', {
+      const response = await fetch('http://eleos-api.scottishtecharmy.org/targetconfig', {
         method: 'GET',
         headers: { token: localStorage.token },
       });

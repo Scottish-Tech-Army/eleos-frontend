@@ -71,7 +71,7 @@ const AddUserDialog = ({
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await fetch('http://eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com/users/add', {
+      const response = await fetch('http://eleos-api.scottishtecharmy.org/users/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

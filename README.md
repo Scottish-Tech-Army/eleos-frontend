@@ -8,7 +8,7 @@
 ### 📌 Bookmarks
 **Services**
 * EC2 (Odoo back-end): [dev ec2](http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/)
-* eleos-api (EB + S3): [eleos-api.scottishtecharmy.com/](https://eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com) 
+* eleos-api (EB + S3): [eleos-api.scottishtecharmy.com/](https://eleos-api.scottishtecharmy.org) 
 * eleos-static (static S3): [eleos.scottishtecharmy.org](https://eleos.scottishtecharmy.org), [S3: eleosfrontend.s3](eleosfrontend.s3-website.eu-north-1.amazonaws.com/) 
 **Management** 
 * [AWS Secret Manager](https://eu-west-2.console.aws.amazon.com/secretsmanager/home?region=eu-west-2#/listSecrets)

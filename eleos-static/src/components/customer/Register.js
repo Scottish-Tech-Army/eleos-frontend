@@ -65,7 +65,7 @@ const Register = ({ setAuth }) => {
     try {
       setLoading(true);
 
-      const response = await fetch('http://eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com/auth/register', {
+      const response = await fetch('http://eleos-api.scottishtecharmy.org/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(inputs),
@@ -90,7 +90,7 @@ const Register = ({ setAuth }) => {
 
   const getAllConfig = async () => {
     try {
-      const response = await fetch('http://eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com/targetconfig', {
+      const response = await fetch('http://eleos-api.scottishtecharmy.org/targetconfig', {
         method: 'GET',
       });
 

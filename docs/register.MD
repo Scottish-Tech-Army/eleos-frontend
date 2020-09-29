@@ -44,7 +44,7 @@ const response = await fetch(
 
 - `Register.js`
   - `target_config_id: '',`
-  - `fetch('http://eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com/auth/register'`
+  - `fetch('http://eleos-api.scottishtecharmy.org/auth/register'`
   - `fetch('/targetconfig`
   - `MenuItem key={index} value={config.target_id}> {config.description}`
   - `targetconfig` is required otherwise you get `422 Unprocessable Entity` - presumably due to schema mismatch
@@ -57,7 +57,7 @@ const response = await fetch(
   - Loads database based on `RDS_` environmental variables
 
 - API
-  - http://eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com/targetconfig
+  - http://eleos-api.scottishtecharmy.org/targetconfig
 - app.use('/targetconfig', require('./api/targetConfigs/targetConfig.routes.js'));
 
 

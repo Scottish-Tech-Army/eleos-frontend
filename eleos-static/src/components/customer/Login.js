@@ -45,7 +45,7 @@ const Login = ({ setAuth }) => {
        */
 
       const response = await fetch(
-        "http://eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com/auth/login",
+        "http://eleos-api.scottishtecharmy.org",
         {
           method: "POST",
           headers: { 

@@ -52,7 +52,7 @@ const EditUserDialog = ({
       const { user_id, description, ...body } = inputs;
 
       const response = await fetch(
-        `http://eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com/users/${inputs.user_id}`,
+        `http://eleos-api.scottishtecharmy.org/users/${inputs.user_id}`,
         {
           method: 'PATCH',
           headers: {

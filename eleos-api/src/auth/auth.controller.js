@@ -73,7 +73,7 @@ const ecLogin = async (req, res, next) => {
      * DEV DB : ec2-35-178-199-156
      * */
     const response = await fetch(
-      "http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web/login",
+      "http://ec2-3-10-212-243.eu-west-2.compute.amazonaws.com/web/login",
       {
         method: "POST",
         body: fd,
@@ -98,7 +98,7 @@ const ecLogin = async (req, res, next) => {
         } else alert("Error contacting Odoo back-end.\n");
       }
       console.log("test3");
-      req.open("POST","http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web/login", false);
+      req.open("POST","http://ec2-3-10-212-243.eu-west-2.compute.amazonaws.com/web/login", false);
       req.setRequestHeader("x-csrf-token","e24b4112a0cbff1ccf02b182f705e6971d035507o");
       req.setRequestHeader("Content-Type","application/json; charset=utf-8");
       req.setRequestHeader("Accept", "text/plain");
@@ -110,7 +110,7 @@ const ecLogin = async (req, res, next) => {
       
       //req.send(JSON.stringify(body));
     };
-    req.open("GET","http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web/login/",true); //true means request will be async
+    req.open("GET","http://ec2-3-10-212-243.eu-west-2.compute.amazonaws.com/web/login/",true); //true means request will be async
     req.send(); 
 
 
@@ -180,7 +180,7 @@ const register = async (req, res, next) => {
      * DEV DB : ec2-35-178-199-156
      * */
     const response = await fetch(
-      "http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web/database/create",
+      "http://ec2-3-10-212-243.eu-west-2.compute.amazonaws.com/web/database/create",
       {
         method: "POST",
         body: fd,

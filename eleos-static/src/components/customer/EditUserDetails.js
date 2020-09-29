@@ -26,7 +26,7 @@ const EditUserDetails = (props) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com/dashboard/edit', {
+      const response = await fetch('http://eleos-api.scottishtecharmy.org/dashboard/edit', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

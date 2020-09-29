@@ -34,7 +34,7 @@ const AdminLogin = ({ setAuth }) => {
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://eleos-api.eba-rfdhwwp4.eu-west-2.elasticbeanstalk.com/auth/adminlogin', {
+      const response = await fetch('http://eleos-api.scottishtecharmy.org/auth/adminlogin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(inputs),
