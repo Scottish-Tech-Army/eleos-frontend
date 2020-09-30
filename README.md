@@ -10,6 +10,7 @@
 * EC2 (Odoo back-end): [dev ec2](http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/)
 * eleos-api (EB + S3): [eleos-api.scottishtecharmy.com/](https://eleos-api.scottishtecharmy.org) 
 * eleos-static (static S3): [eleos.scottishtecharmy.org](https://eleos.scottishtecharmy.org), [S3: eleosfrontend.s3](eleosfrontend.s3-website.eu-north-1.amazonaws.com/) 
+
 **Management** 
 * [AWS Secret Manager](https://eu-west-2.console.aws.amazon.com/secretsmanager/home?region=eu-west-2#/listSecrets)
 * [atlassian wiki](https://sta2020.atlassian.net/wiki/home)
@@ -17,8 +18,12 @@
 **TODO**
 - [x] Build and push changes to both frontend and api to test
 - [x] Centralised key-share?
-- [ ] Test database
-- [ ] dbfilter_from_header
+- [x] Test database configure + docs
+- [x] dbfilter_from_header enabled on server
+- [x] Retrieving `database` name from eleos-api
+- [ ] Retrieving `crsf_token` from EC2
+- [ ] POST `database` + `crsf_token` + credentials to EC2
+- [ ] Render Odoo instance
 - [ ] target config
 - [ ] Automate credentials
 - [ ] Platform update?
@@ -34,18 +39,19 @@
 * eb
 * s3cmd
 
-### 🔐 Credentials
+## 🔐 Access
 
-* master password is required to send post requests to the odoo database manager (MPWD)
-* default admin password is `passwordpassword`. Ideally creation of the default admin user needs to be automated
-* PSQL database is included as part of the same Elastic Beanstalk instance. 
+* **MPWD:** master password is required to send post requests to the odoo database manager 
+* **default admin password** is `passwordpassword`. Ideally creation of the default admin user needs to be automated
 
 The credentials for the database can be retrieved from [AWS Secret Manager](https://eu-west-2.console.aws.amazon.com/secretsmanager/home?region=eu-west-2#/listSecrets)
 
 #### Amazon Relational Database Service (Amazon RDS)
 **Static**
 
-> The databases for Eleos are configured within the AWS Management console at `Elastic Beanstalk -> Configuration -> Database`
+> The databases for Eleos are configured within the AWS Management console at `Elastic Beanstalk -> Configuration -> Database` and can also be accessed directly with psql
+
+`psql -h aaharaujhpjxt7.cqrta6bb4sbn.eu-west-2.rds.amazonaws.com -p 5432 -U dbuser -W "U...q" ebdb`
 
 ```
 # database: 'ebdb'
@@ -57,18 +63,13 @@ npm start
 ```
 
 **Dynamic**
-> The credentials expire for AWS every 12 hours and must be constantly reset. 
+> The credentials expire for AWS every hour and must be constantly reset. 
 
 Environmental variables may be saved in the following locations and need updated
-```
-rm ~/.aws/credentials
-rm ~/.s3cfg
-aws configure
-s3cmd --configure
-echo $AWS_ACCESS_KEY_ID 
-echo $AWS_SECRET_ACCESS_KEY 
-echo $AWS_SESSION_TOKEN
-```
+
+1. Export the environmental variables from here - [AWS](https://scottishtecharmy.awsapps.com/start/)
+2. Run `aws configure` and re-enter environmental variables
+
 
 ## 🕵️‍♂️ Testing
  * [test ec2](http://ec2-3-10-212-243.eu-west-2.compute.amazonaws.com/), 
@@ -79,8 +80,14 @@ cd eleos-api
 npm test
 ```
 
+More details on switcing between instances can be found in docs/testDatabase.md
+
 ## 🚀 Deploying
 > ../sh/deploy.sh 
+
+deploy.sh builds and deploys both components, if only one is needed, `cd` into the directory and run `npm run deploy`. 
+
+This is configured with a script in `package.json` which does the following
 - cd eleos-static --> builds the app for production to the `build` folder --> deployed on S3
 - cd eleos-api --> eb deploy --> eleos-api: ec2-user@35.178.210.66
 
@@ -168,10 +175,5 @@ eb ssh
 ### Populates target_config if needed
 > npm run seed:config
 > `node seed:admin` runs `node src/tasks/createAdminUser.js`
-
-### concurrently
-
-* `npm i --s concurrently`
-* `npm install cors --save`
 
 

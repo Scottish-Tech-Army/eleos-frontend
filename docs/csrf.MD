@@ -9,7 +9,7 @@
 
 
 
-## Retrieving CSRF
+## Database Connection
 
 * Dashboard.js - 'Proceed to instance' button
 1. Get `database` name
