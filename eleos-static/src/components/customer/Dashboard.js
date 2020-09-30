@@ -15,7 +15,6 @@ import { get as getCookie } from "browser-cookies";
  *
  */
 const Dashboard = ({ setAuth }) => {
-  //getUserDetails();
   const classes = useStyles();
 
   // Object prototype
@@ -33,6 +32,7 @@ const Dashboard = ({ setAuth }) => {
 
   const [isEditing, setIsEditing] = useState(false);
 
+  // Retrieves the user details from the API
   async function getUserDetails() {
     // Retrieves the user details from eleos-api
     try {
@@ -52,34 +52,9 @@ const Dashboard = ({ setAuth }) => {
     }
   }
 
-  /**
-   *
-   * getToken retrieves the CSRF token from EC2
-   *
-   */
   async function getToken() {
-    try {
-      const response = await fetch(
-        "http://eleos-api.scottishtecharmy.org/dashboard/",
-        {
-          method: "GET",
-          headers: { token: localStorage.token }, // Pass token for API in header
-        }
-      );
-
-      const parseRes = await response.json(); // {name: "", subdomain: "", admin_email: "", admin_firstname: "", admin_lastname: "", …}
-
-      setUserDetails(parseRes); // setUserDetails stores this json response as an object
-      console.log(parseRes);
-      //console.log(body);
-      console.log(db);
-      //console.log(UserDetail.database);
-      //console.log(UserDetails);
-      //console.log(getUserDetails);
-      //console.log(this.db);
-    } catch (err) {
-      console.error(err.message);
-    }
+    getUserDetails();
+    console.log(db);
   }
 
   const toggleEdit = () => {
@@ -94,8 +69,8 @@ const Dashboard = ({ setAuth }) => {
   // useEffect will run when the component renders
   useEffect(() => {
     getUserDetails();
-  }, [isEditing]); // removed `, [isEditing]` here to have it auto-load the details - causes multiple requests TODO
-
+  }, [isEditing]); 
+  
   return (
     <div className={classes.layout}>
       <Paper className={classes.paper}>
