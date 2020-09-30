@@ -9,16 +9,18 @@
 **Services**
 * EC2 (Odoo back-end): [dev ec2](http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/)
 * eleos-api (EB + S3): [eleos-api.scottishtecharmy.com/](https://eleos-api.scottishtecharmy.org) 
-* eleos-static (static S3): [eleos.scottishtecharmy.org](https://eleos.scottishtecharmy.org), [S3: eleosfrontend.s3](eleosfrontend.s3-website.eu-north-1.amazonaws.com/) 
+* eleos-static (static S3): [eleos.scottishtecharmy.org](https://eleos.scottishtecharmy.org)
 
 **Management** 
+AWS Dashboard](https://scottishtecharmy.awsapps.com/start/).
 * [AWS Secret Manager](https://eu-west-2.console.aws.amazon.com/secretsmanager/home?region=eu-west-2#/listSecrets)
 * [atlassian wiki](https://sta2020.atlassian.net/wiki/home)
 
 **TODO**
 - [x] Build and push changes to both frontend and api to test
 - [x] Centralised key-share?
-- [x] Test database configure + docs
+- [x] Test database configure
+- [x] Write documentation for existing processes
 - [x] dbfilter_from_header enabled on server
 - [x] Retrieving `database` name from eleos-api
 - [ ] Retrieving `crsf_token` from EC2
@@ -27,48 +29,19 @@
 - [ ] target config
 - [ ] Automate credentials
 - [ ] Platform update?
+- [ ] All code documented
 
 
 ## Getting Started
 
 ### Prereq
->These should all be relatively self explanatory to install but will depend on platform. The only options that need entered are your personal security tokens from [AWS](https://scottishtecharmy.awsapps.com/start/).
+>These should all be relatively self explanatory to install but will depend on platform. The only options that need entered are your personal security tokens from [AWS Dashboard](https://scottishtecharmy.awsapps.com/start/).
 
 * aws
 * npm
 * eb
 * s3cmd
 
-## 🔐 Access
-
-* **MPWD:** master password is required to send post requests to the odoo database manager 
-* **default admin password** is `passwordpassword`. Ideally creation of the default admin user needs to be automated
-
-The credentials for the database can be retrieved from [AWS Secret Manager](https://eu-west-2.console.aws.amazon.com/secretsmanager/home?region=eu-west-2#/listSecrets)
-
-#### Amazon Relational Database Service (Amazon RDS)
-**Static**
-
-> The databases for Eleos are configured within the AWS Management console at `Elastic Beanstalk -> Configuration -> Database` and can also be accessed directly with psql
-
-`psql -h aaharaujhpjxt7.cqrta6bb4sbn.eu-west-2.rds.amazonaws.com -p 5432 -U dbuser -W "U...q" ebdb`
-
-```
-# database: 'ebdb'
-export setenv RDS_USERNAME=dbuser
-export setenv RDS_PASSWORD='' 
-export setenv RDS_HOSTNAME=aaharaujhpjxt7.cqrta6bb4sbn.eu-west-2.rds.amazonaws.com
-export setenv RDS_PORT=5432
-npm start
-```
-
-**Dynamic**
-> The credentials expire for AWS every hour and must be constantly reset. 
-
-Environmental variables may be saved in the following locations and need updated
-
-1. Export the environmental variables from here - [AWS](https://scottishtecharmy.awsapps.com/start/)
-2. Run `aws configure` and re-enter environmental variables
 
 
 ## 🕵️‍♂️ Testing
@@ -113,7 +86,45 @@ If you need to use `eb init`, the following settings must be selected
 - (16) **eu-west-2** : EU (London)
 - Node.js 12 running on 64bit Amazon Linux 2
 
-## 🚪 Direct Access
+## 🔐 Credentials 
+
+* **MPWD:** master password is required to send post requests to the odoo database manager 
+* **default admin password** is `passwordpassword`. Ideally creation of the default admin user needs to be automated
+
+The credentials for the database can be retrieved from [AWS Secret Manager](https://eu-west-2.console.aws.amazon.com/secretsmanager/home?region=eu-west-2#/listSecrets)
+
+
+### AWS 
+> The credentials expire for AWS every hour and must be constantly reset. 
+
+Environmental variables may be saved in the following locations and need updated
+
+1. Export the environmental variables from here - [AWS](https://scottishtecharmy.awsapps.com/start/)
+2. Run `aws configure` and re-enter environmental variables
+
+
+### 🚪 Direct Access
+
+#### Amazon Relational Database Service (Amazon RDS)
+
+**Accessing E2**
+> The databases for Eleos are configured within the AWS Management console at `Elastic Beanstalk -> Configuration -> Database` and can also be accessed directly with psql
+
+**Accessing React Database**
+> This is where the local user credentials are stored along with their choice for subdomain and target_config
+```
+psql -h aaharaujhpjxt7.cqrta6bb4sbn.eu-west-2.rds.amazonaws.com -p 5432 -U dbuser -W "U...q" ebdb
+```
+
+```
+# database: 'ebdb'
+export setenv RDS_USERNAME=dbuser
+export setenv RDS_PASSWORD='' 
+export setenv RDS_HOSTNAME=aaharaujhpjxt7.cqrta6bb4sbn.eu-west-2.rds.amazonaws.com
+export setenv RDS_PORT=5432
+npm start
+```
+
 
 **Accessing E2**
 >ODOO.pem RSA stored on [AWS Secret Manager](https://eu-west-2.console.aws.amazon.com/secretsmanager/home?region=eu-west-2#/listSecrets)
