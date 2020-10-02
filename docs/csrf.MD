@@ -4,11 +4,6 @@
 
 
 
-
-* so form input will include 
-
-
-
 ## Database Connection
 
 * Dashboard.js - 'Proceed to instance' button
@@ -23,17 +18,34 @@
 ### 1
 Database is pulling and displaying via console.log
 
+Set up a `const db` variable (ln31) to store the database value, this is empty until the user hits 'Proceed to instance' - it will then call `getUserDetails()` via an async function `getToken()` and populate that variable.
+
+I've done this in eleos-static/Dashboard.js, which I think is the most appropriate place - however once the code is figured out this could be replicated in login/register in order to give a smoother transition. 
+
+
 ### 2
+the crsf_token is included in the body when we GET ?db='database-name'
 
 document.getElementById("myLink").innerHTML=csrf_token;
 
-the crsf_token is included in the raw :
 ```
 <script type=“text/javascript”>
                     var odoo = {
                         csrf_token: “28a965d362bb45b0a3c789ab352a3183f39bf21do”,
                         debug: “”,
 ```
+
+Next step is to parse and store this variable. This is probably best done
+from the eleos-api, that way the api server calls it and prevents a CORS error. 
+
+This then needs to be bundled with 
+* the database name as a Odoo filter
+* username/password
+* CSRF token
+
+I believe rendering the DOM would be the best method of displaying
+the Odoo page to the user; but I'm inexperienced in this area so unsure. 
+
 
 Full response
 ```

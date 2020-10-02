@@ -12,7 +12,7 @@
 * eleos-static (static S3): [eleos.scottishtecharmy.org](https://eleos.scottishtecharmy.org)
 
 **Management** 
-AWS Dashboard](https://scottishtecharmy.awsapps.com/start/).
+* [AWS Dashboard](https://scottishtecharmy.awsapps.com/start/).
 * [AWS Secret Manager](https://eu-west-2.console.aws.amazon.com/secretsmanager/home?region=eu-west-2#/listSecrets)
 * [atlassian wiki](https://sta2020.atlassian.net/wiki/home)
 

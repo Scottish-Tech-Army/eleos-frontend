@@ -51,7 +51,7 @@ const Dashboard = ({ setAuth }) => {
       console.error(err.message);
     }
   }
-
+  // The function called by the 'Proceed to instance' button
   async function getToken() {
     getUserDetails();
     console.log(db);
