@@ -16,7 +16,6 @@ import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
 import avatarLogo from "../../images/STAminilogo.jpg";
 import { useStyles } from "../../styles/LoginStyles";
-import axios from "axios";
 
 const Login = ({ setAuth }) => {
   const classes = useStyles();

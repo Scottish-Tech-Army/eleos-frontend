@@ -18,7 +18,7 @@ AWS Dashboard](https://scottishtecharmy.awsapps.com/start/).
 
 **TODO**
 - [x] Build and push changes to both frontend and api to test
-- [x] Centralised key-share?
+- [x] Centralised key-share
 - [x] Test database configure
 - [x] Write documentation for existing processes
 - [x] dbfilter_from_header enabled on server
