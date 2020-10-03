@@ -98,6 +98,7 @@ var res = null;
           "Content-Type",
           "application/json; charset=utf-8"
         );
+        req.setRequestHeader("X-Odoo-dbfilter", "data");
         tryout.setRequestHeader("Accept", "application/json");
         req.setRequestHeader("X-Odoo-dbfilter", "data");
 
@@ -196,3 +197,63 @@ var res = null;
         toast.error(err.message);
       }
     */
+
+    /*
+    var res = null;
+    var tryout = new XMLHttpRequest();
+    
+    tryout.open(
+      "GET",
+      "http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web?db=" + db,
+      false
+      );
+    
+      //tryout.withCredentials = true;
+      //tryout.setRequestHeader("x-csrf-token", "fetch");
+      //tryout.setRequestHeader("Accept", "application/json");
+      //tryout.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+      //tryout.send(null);
+    
+      if (tryout.readyState === 4) {
+        var csrfToken = tryout.getResponseHeader("x-csrf-token");
+
+        tryout.open(
+          "POST",
+          "http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web?db=" + db,
+          false
+        );
+        
+        tryout.setRequestHeader("x-csrf-token", csrfToken);
+        tryout.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+        tryout.setRequestHeader("Accept", "application/json");
+
+        //tryout.send(JSON.stringify(body));
+
+        if (tryout.readyState === 4) {
+          res = JSON.parse(this.responseText);
+        }
+      // window.location.href = 'http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com';
+    // https://stackoverflow.com/questions/48659892/how-to-handle-csrf-token-using-xmlhttprequest
+
+    }
+    res.setRequestHeader(
+      "X-Odoo-dbfilter", "data",
+      ("X-CSRFToken", csrfToken)
+    );
+      
+    if (req.readyState === 4) {    
+      req.open("POST", "http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web?db=" + db, false);
+      req.setRequestHeader("x-csrf-token", csrfToken);
+
+  
+      if (req.readyState === 4) {
+        res = JSON.parse(this.responseText);
+      }
+    }
+   
+    res.send();
+  }*/
+
+    
+    
+  

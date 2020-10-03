@@ -17,6 +17,7 @@ app.get('/', (req, res) => {
 
 // register and login routes
 
+
 app.use('/auth', require('./auth/auth.routes'));
 
 // dashboard route
