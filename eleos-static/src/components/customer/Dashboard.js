@@ -67,7 +67,6 @@ const Dashboard = ({ setAuth }) => {
     xhr.onload = function () {
       console.log("Odoo crsf token:");
       localStorage.csrfToken = this.responseXML.getElementsByName("csrf_token")[0].getAttribute("value");
-      console.log("Odoo crsf token:");
       console.log(localStorage.csrfToken);
       /*
       addCSRFAndProceed('http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/');
@@ -91,7 +90,7 @@ const Dashboard = ({ setAuth }) => {
     formData.append("login", "data@data.com");
     formData.append("password", "blink");
     formData.append("redirect", "");
-    console.log(formData);
+    console.log(formData.entries());
 
 
     // Login
@@ -99,7 +98,7 @@ const Dashboard = ({ setAuth }) => {
       "http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web/login/",
       {
         method: "POST",
-        headers: {"Content-Type": "multipart/form-data", "X-Odoo-dbfilter": "data", "crsf_token": localStorage.csrfToken},
+        headers: {"Content-Type": "multipart/form-data", "X-Odoo-dbfilter": "data"},
         redirect: "",
         body: formData,
       }
