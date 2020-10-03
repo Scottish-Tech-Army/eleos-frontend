@@ -44,7 +44,7 @@ const Login = ({ setAuth }) => {
        */
 
       const response = await fetch(
-        "http://eleos-api.scottishtecharmy.org",
+        "http://eleos-api.scottishtecharmy.org/auth/login",
         {
           method: "POST",
           headers: { 
@@ -155,111 +155,5 @@ const Login = ({ setAuth }) => {
 };
 
 export default Login;
-/**
- * 
- * 
- * "x-csrf-token": csrfToken,
-"X-Odoo-dbfilter": "data",
- * 
- *   // Attempt at passing header
-        /*
-        axios.request({
-          url: 'http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/',
-          method: 'post',
-          headers: { 'X-Odoo-dbfilter': 'data', "X-CSRFToken": 'token' }
-        })
-        
-        //window.location.href = 'http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com'; 
-        
-*/
-
- // https://stackoverflow.com/questions/48659892/how-to-handle-csrf-token-using-xmlhttprequest
-  /**
-   *
-  var res = null;
-  var tryout = new XMLHttpRequest();
-  tryout.open("GET", "http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web?db=data", false);
-  //tryout.withCredentials = true;
-  //tryout.setRequestHeader("x-csrf-token", "fetch");
-  //tryout.setRequestHeader("Accept", "application/json");
-  //tryout.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-  //tryout.send(null);
-   if (tryout.readyState === 4) {
-    var csrfToken = tryout.getResponseHeader("x-csrf-token");
-
-    tryout.open("POST", "http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web?db=data", false);
-    tryout.setRequestHeader("x-csrf-token", csrfToken);
-    tryout.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-    tryout.setRequestHeader("Accept", "application/json");
-
-    //tryout.send(JSON.stringify(body));
-
-    if (tryout.readyState === 4) {
-      res = JSON.parse(this.responseText);
-    }
-  }
-   */
-
-    /**
-       * 
-       * XMLHttpRequest
-       * GET the page with the db as a param, retrieve the csrf_token from the html
-       
-      var obj;
-
-      fetch('http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web?db=data')
-        .then(res => res.json())
-        .then(data => obj = data)
-        .then(() => console.log(obj))
-
-      var res = null;
-      var csrfToken = null;
-      var req = new XMLHttpRequest();
-
-      req.open(
-        "GET",
-        "http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web?db=data",
-        true
-      ); //true means request will be async
-      
-      req.onreadystatechange = function (aEvt) {
-        // 4 == Done
-        if (req.readyState == 4) {
-          if (req.status == 200) {
-            document.write(req.responseText);
-            var csrfToken = req.getResponseHeader("x-csrf-token");
-            console.log(csrfToken);
-            //res.setRequestHeader("x-csrf-token", "fetch");
-          }
-          else alert("Error contacting Odoo back-end.\n");
-        }
-        //req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-        //req.setRequestHeader("Accept", "application/json");
-        //req.send(JSON.stringify(body));
-      };
-      
-     
-      res.setRequestHeader(
-        "X-Odoo-dbfilter",
-        "data",
-        ("X-CSRFToken": csrfToken)
-      );
-        
-      if (req.readyState === 4) {    
-        req.open("POST", "http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web?db=data", false);
-        req.setRequestHeader("x-csrf-token", csrfToken);
-
-    
-        
-        
-    
-        if (req.readyState === 4) {
-          res = JSON.parse(this.responseText);
-        }
-      }
-     
-      res.send();
-       
-*/
 
       
