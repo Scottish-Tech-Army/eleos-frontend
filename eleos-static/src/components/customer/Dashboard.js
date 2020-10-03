@@ -7,6 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import UserDetails from "./UserDetails";
 import { useStyles } from "../../styles/DashboardStyles";
 import { get as getCookie } from "browser-cookies";
+const FormData = require("form-data");
 
 /**
  *
@@ -54,52 +55,73 @@ const Dashboard = ({ setAuth }) => {
 
   // The function called by the 'Proceed to instance' button
   async function getToken() {
-    
-    // Retrieve the database
+    // Retrieve the database - working
     getUserDetails();
-    
+
     // Print to console
-    console.log('database:')
+    console.log("database:");
     console.log(db);
 
-    // Not sure how to call this through API   
+    // get the CRSF Token
     var xhr = new XMLHttpRequest();
-    xhr.onload = function() {
-      console.log('Odoo crsf token:')
-      localStorage.csrfToken = this.responseXML.getElementsByName('csrf_token')[0].getAttribute('value')
-      
-      //addCSRFAndProceed('http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/');
-      function addCSRFAndProceed (url) {
-          window.location.href = url + '?token=' + getCSRFTokenAndValue();
+    xhr.onload = function () {
+      console.log("Odoo crsf token:");
+      localStorage.csrfToken = this.responseXML.getElementsByName("csrf_token")[0].getAttribute("value");
+      console.log("Odoo crsf token:");
+      console.log(localStorage.csrfToken);
+      /*
+      addCSRFAndProceed('http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/');
+      function addCSRFAndProceed(url) {
+        //window.location.href = url + "?token=" + getCSRFTokenAndValue();
+        getCSRFTokenAndValue();
       }
       function getCSRFTokenAndValue() {
-          return localStorage.csrfToken;
+        return localStorage.csrfToken;
       }
-
-    }
+      */
+    };
     xhr.open("GET", "http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web?db=data");
     xhr.responseType = "document";
     xhr.send();
 
-    var req = new XMLHttpRequest();
-    req.open('GET', 'http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/', true); //true means request will be async
-    req.onreadystatechange = function (aEvt) {
-      if (req.readyState == 4) {
-        if(req.status == 200)
-          document.write(req.responseText);
-          //update the page here
-          //req.responseText - is the result html 
-        else
-          alert("Error loading page\n");
+    // Prepare form data for Odoo
+    const formData = new FormData();
+    formData.append("csrf_token","6964fb2891686c5e88b611594f18e5b09dee9d78o1601764935");
+    formData.append("db", "data");
+    formData.append("login", "data@data.com");
+    formData.append("password", "blink");
+    formData.append("redirect", "");
+    console.log(formData);
+
+
+    // Login
+    const res = await fetch(
+      "http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web/login/",
+      {
+        method: "POST",
+        headers: {"Content-Type": "multipart/form-data", "X-Odoo-dbfilter": "data", "crsf_token": localStorage.csrfToken},
+        redirect: "",
+        body: formData,
       }
-    };
-    req.setRequestHeader('crsf_token', localStorage.csrfToken);
-    req.setRequestHeader("X-Odoo-dbfilter", "data");
-   // req.setRequestHeader("Accept", "application/json");
-    req.send();
-
+    ).then((res) => { 
+      console.log(res);
+      /*
+      var req = new XMLHttpRequest();
+        req.open("GET","http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web/login/", true); 
+        req.onreadystatechange = function (aEvt) {
+          if (req.readyState == 4) {
+            if (req.status == 200) document.write(req.responseText); //  If successful, write page to document
+            else alert("Error loading page\n");
+          }
+        };
+        req.setRequestHeader("crsf_token", localStorage.csrfToken);
+        req.setRequestHeader("X-Odoo-dbfilter", "data");
+        req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        // req.setRequestHeader("Accept", "application/json");
+      req.send();
+      */
+    });
   }
-
 
   const toggleEdit = () => {
     isEditing ? setIsEditing(false) : setIsEditing(true);
@@ -113,8 +135,9 @@ const Dashboard = ({ setAuth }) => {
   // useEffect will run when the component renders
   useEffect(() => {
     getUserDetails();
-  }, [isEditing]); 
-  
+  }, [isEditing]);
+
+  // DOM
   return (
     <div className={classes.layout}>
       <Paper className={classes.paper}>
