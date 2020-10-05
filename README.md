@@ -23,7 +23,7 @@
 - [x] Write documentation for existing processes
 - [x] dbfilter_from_header enabled on server
 - [x] Retrieving `database` name from eleos-api
-- [ ] Retrieving `crsf_token` from EC2
+- [x] Retrieving `crsf_token` from EC2
 - [ ] POST `database` + `crsf_token` + credentials to EC2
 - [ ] Render Odoo instance
 - [ ] target config

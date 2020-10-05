@@ -22,7 +22,7 @@ const FormData = require('form-data');
  */
 const Dashboard = ({ setAuth }) => {
   const classes = useStyles();
-  const fd = new FormData();
+  
 
   
     //  MIME Type: application/x-www-form-urlencoded
@@ -61,44 +61,112 @@ const Dashboard = ({ setAuth }) => {
       console.error(err.message);
     }
   }
+  /**
+   * sends a request to the specified url from a form. this will change the window location.
+   * @param {string} path the path to send the post request to
+   * @param {object} params the paramiters to add to the url
+   * @param {string} [method=post] the method to use on the form
+   */
 
+  function post(path, params, method='post') {
+
+    const form = document.createElement('form');
+    form.method = method;
+    form.action = path;
+
+    for (const key in params) {
+      if (params.hasOwnProperty(key)) {
+        const hiddenField = document.createElement('input');
+        hiddenField.type = 'hidden';
+        hiddenField.name = key;
+        hiddenField.value = params[key];
+
+        form.appendChild(hiddenField);
+      }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+  }
   // The function called by the 'Proceed to instance' button
   async function getToken() {
+    const fd = new FormData();
+
     getUserDetails(); // Retrieve the database
     console.log(db);
 
     // Retrieves CSRF token from Odoo 
     var xhr = new XMLHttpRequest();
-      xhr.onload = function() {
-        localStorage.csrfToken = this.responseXML.getElementsByName('csrf_token')[0].getAttribute('value')
-        console.log(localStorage.csrfToken)
-      }
-      xhr.open("GET", "http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web?db=" + db);
-      xhr.responseType = "document";
+    xhr.onload = function() {
+      fd.append(this.responseXML.getElementsByName('csrf_token')[0].getAttribute('value'));
+      // document.write
+      var req = new XMLHttpRequest();
+      req.open('POST', 'http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web?db=data', true); //true means request will be async
+      req.onreadystatechange = function (aEvt) {
+        if (req.readyState == 4) {
+          if(req.status == 200)
+            document.write(req.responseText);
+          else
+            alert("Error loading page\n");
+        }
+      };
+      req.setRequestHeader('csrf_token', fd.headers);
+      req.setRequestHeader("X-Odoo-dbfilter", db);// req.setRequestHeader("Accept", "application/json");
+    }
+    xhr.open("GET", "http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web?db=data");
+    xhr.responseType = "document";
     xhr.send();
-    //
 
-  
-    // document.write
-    var req = new XMLHttpRequest();
-    req.open('GET', 'http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web/login', true); //true means request will be async
-    req.onreadystatechange = function (aEvt) {
-      if (req.readyState == 4) {
-        if(req.status == 200)
-          document.write(req.responseText);
-        else
-          alert("Error loading page\n");
-      }
-    };
-    req.setRequestHeader('csrf_token', localStorage.csrfToken);
-    req.setRequestHeader("X-Odoo-dbfilter", db);// req.setRequestHeader("Accept", "application/json");
-    fd.append('csrf_token', localStorage.csrfToken);
-    fd.append('db', 'data');
+    // FormData
+    
+    //fd.append('csrf_token', localStorage.csrfToken);
+    //fd.append('db', 'data');
     fd.append('login', 'data@data.com');
     fd.append('password', 'blink');
-    fd.append('redirect', '')
-    req.send(fd);
-    //
+    //fd.append('redirect', '');
+
+    console.log(fd);
+    
+    // POST
+    fetch('http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web?db=data', {
+      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      mode: "no-cors", // no-cors, cors, *same-origin
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: "include", // include, *same-origin, omit
+      headers: {
+          //"Content-Type": "application/json",
+          "Content-Type": "application/x-www-form-urlencoded",
+          "X-Odoo-dbfilter": "data"
+      },
+      redirect: "follow", // manual, *follow, error
+      referrer: "no-referrer", // no-referrer, *client
+      body: fd, // body data type must match "Content-Type" header
+    })
+    .then(response => {
+        // HTTP 301 response
+        // HOW CAN I FOLLOW THE HTTP REDIRECT RESPONSE?
+        if (response.redirected) {
+            window.location.href = response.url;
+        }
+    })
+    .catch(function(err) {
+        console.info('here be errors');
+    });
+
+    
+
+   
+
+    
+
+    post('http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web?db=data', fd)
+
+
+    /** 
+    
+    
+    */
+    
 
   }
 
