@@ -25,7 +25,7 @@
 - [x] Retrieving `database` name from eleos-api
 - [x] Retrieving `crsf_token` from EC2
 - [ ] POST `database` + `crsf_token` + credentials to EC2
-- [ ] Render Odoo instance
+- [x] Render Odoo instance
 - [ ] target config
 - [ ] Automate credentials
 - [ ] Platform update?
