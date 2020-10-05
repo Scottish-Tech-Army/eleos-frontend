@@ -24,11 +24,7 @@ const Dashboard = ({ setAuth }) => {
   const classes = useStyles();
   const fd = new FormData();
 
-  fd.append('csrf_token', '24115fad6eb47ebae09e32c23ce57ec58c4f3d03o1601769248');
-  fd.append('db', 'data');
-  fd.append('login', 'data@data.com');
-  fd.append('password', 'blink');
-  fd.append('redirect', '')
+  
     //  MIME Type: application/x-www-form-urlencoded
 
   // Object prototype
@@ -77,7 +73,7 @@ const Dashboard = ({ setAuth }) => {
         localStorage.csrfToken = this.responseXML.getElementsByName('csrf_token')[0].getAttribute('value')
         console.log(localStorage.csrfToken)
       }
-      xhr.open("GET", "http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web/login");
+      xhr.open("GET", "http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web?db=" + db);
       xhr.responseType = "document";
     xhr.send();
     //
@@ -95,7 +91,12 @@ const Dashboard = ({ setAuth }) => {
       }
     };
     req.setRequestHeader('csrf_token', localStorage.csrfToken);
-    req.setRequestHeader("X-Odoo-dbfilter", "data");// req.setRequestHeader("Accept", "application/json");
+    req.setRequestHeader("X-Odoo-dbfilter", db);// req.setRequestHeader("Accept", "application/json");
+    fd.append('csrf_token', localStorage.csrfToken);
+    fd.append('db', 'data');
+    fd.append('login', 'data@data.com');
+    fd.append('password', 'blink');
+    fd.append('redirect', '')
     req.send(fd);
     //
 
