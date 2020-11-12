@@ -7,12 +7,10 @@ import Grid from "@material-ui/core/Grid";
 import UserDetails from "./UserDetails";
 import { useStyles } from "../../styles/DashboardStyles";
 import { get as getCookie } from "browser-cookies";
-const FormData = require('form-data');
+
+const FormData = require("form-data");
 
 // Prepare FormData for Odoo
-    
-
-
 
 /**
  *
@@ -22,10 +20,8 @@ const FormData = require('form-data');
  */
 const Dashboard = ({ setAuth }) => {
   const classes = useStyles();
-  
 
-  
-    //  MIME Type: application/x-www-form-urlencoded
+  //  MIME Type: application/x-www-form-urlencoded
 
   // Object prototype
   const [userDetails, setUserDetails] = useState({
@@ -37,8 +33,8 @@ const Dashboard = ({ setAuth }) => {
     active: "",
   });
 
-  // Attempt at storing the db value
-  const db = userDetails.name;
+  
+  const db = userDetails.name; // Retrieving the database name
 
   const [isEditing, setIsEditing] = useState(false);
 
@@ -61,125 +57,50 @@ const Dashboard = ({ setAuth }) => {
       console.error(err.message);
     }
   }
-  /**
-   * sends a request to the specified url from a form. this will change the window location.
-   * @param {string} path the path to send the post request to
-   * @param {object} params the paramiters to add to the url
-   * @param {string} [method=post] the method to use on the form
-   */
 
-  function post(path, params, method='post') {
-
-    const form = document.createElement('form');
-    const csrf = document.getElementsByName('csrf_token')[0].getAttribute('value');
-    form.method = method;
-    form.action = path;
-
-    for (const key in params) {
-      if (params.hasOwnProperty(key)) {
-        const hiddenField = document.createElement('input');
-        hiddenField.type = 'hidden';
-        hiddenField.name = key;
-        hiddenField.value = params[key];
-
-        form.appendChild(hiddenField);
-      }
-    }
-
-    document.body.appendChild(form);
-    form.submit();
-  }
-  // The function called by the 'Proceed to instance' button
+   // The function called by the 'Proceed to instance' button
   async function getToken() {
-    const formData = new FormData();
+    
+    // Retrieve the database
+    getUserDetails();
+    
+    // Print to console
+    console.log('database:' + db);
+    var url = "http://" + db + ".eleos.relyrecruit.com/web/login";
 
-    //formData.append('csrf_token', localStorage.csrfToken);
-    //formData.append('db', 'data');
-    formData.append('login', 'data@data.com');
-    formData.append('password', 'blink');
-    //formData.append('redirect', '');
-
-    // Display the key/value pairs
-    for (var pair of formData.entries()) {
-      console.log(pair[0]+ ', ' + pair[1]); 
+    /*
+    function getHTML (oXHR, sTargetId) {
+      console.log('getHTML()');
+      console.log(oXHR.responseText);
+      var  rOpen = new RegExp("<(?!\!)\\s*([^\\s>]+)[^>]*\\s+id\\=[\"\']" + sTargetId + "[\"\'][^>]*>" ,"i"),
+           sSrc = oXHR.responseText, aExec = rOpen.exec(sSrc);
+    
+      return aExec ? (new RegExp("(?:(?:.(?!<\\s*" + aExec[1] + "[^>]*[>]))*.?<\\s*" + aExec[1] + "[^>]*[>](?:.(?!<\\s*\/\\s*" + aExec[1] + "\\s*>))*.?<\\s*\/\\s*" + aExec[1] + "\\s*>)*(?:.(?!<\\s*\/\\s*" + aExec[1] + "\\s*>))*.?", "i")).exec(sSrc.slice(sSrc.indexOf(aExec[0]) + aExec[0].length)) || "" : "";
     }
-
-    getUserDetails(); // Retrieve the database
-    console.log(db);
-
-    // document.write
-    // Retrieves CSRF token from Odoo 
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function() {
-      var csrfToken = this.responseXML.getElementsByName('csrf_token')[0].getAttribute('value');
-    }
-    xhr.open("GET", "http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web?db=data");
-    xhr.responseType = "document";
-    xhr.send();
-
-    var req = new XMLHttpRequest();
-    req.onreadystatechange = function (aEvt) {
-      
-      if (req.readyState == 4) {
-        
-        if(req.status == 200)
-          //window.location.href('http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web?db=data')
-          document.write(req.responseText);
-        else
-          alert("Error loading page\n");
-      }
-    };
-    //req.setRequestHeader('csrf_token', formData.headers);
-    req.setRequestHeader("X-Odoo-dbfilter", 'data'); // req.setRequestHeader("Accept", "application/json");
-    //req.setRequestHeader("x-crsf-token", csrfToken);
-    req.send();
-
-    post('http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web?db=data', formData);
-    /**
-
-
-    // POST
-    fetch('http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/web?db=data', {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      mode: "no-cors", // no-cors, cors, *same-origin
-      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: "include", // include, *same-origin, omit
-      headers: {
-          //"Content-Type": "application/json",
-          "Content-Type": "application/x-www-form-urlencoded",
-          "X-Odoo-dbfilter": "data"
-      },
-      redirect: "follow", // manual, *follow, error
-      referrer: "no-referrer", // no-referrer, *client
-      body: formData, // body data type must match "Content-Type" header
-    })
-    .then(response => {
-        
-        if (response.redirected) {
-            window.location.href = response.url;
-        }
-    })
-    .catch(function(err) {
-        console.info('here be errors');
-    });
-
-    
-
-   
-
-    
-
-    
-
-
-    /** 
-    
-    
     */
-    
 
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', url, true);
+    //xhr.onload = function () { console.log(getHTML(this, "csrf-token")); };
+    xhr.onreadystatechange=function()
+    {
+        if (xhr.readyState==4 && xhr.status==200)
+        {
+            //csrftoken = document.getElementsByName('csrf-token')[0].content;
+            document.write(xhr.responseText);
+        }
+    }
+
+    var fd = new FormData();
+    fd.append("login", "data@data.com");
+    fd.append("password", "blink");
+    fd.append("redirect", "");
+
+    //xhr.setRequestHeader("Content-Type", "multipart/form-data; boundary=l3iPy71otz");
+    //xhr.withCredentials = true;
+
+    xhr.send(fd);
   }
-
 
   const toggleEdit = () => {
     isEditing ? setIsEditing(false) : setIsEditing(true);
@@ -193,8 +114,8 @@ const Dashboard = ({ setAuth }) => {
   // useEffect will run when the component renders
   useEffect(() => {
     getUserDetails();
-  }, [isEditing]); 
-  
+  }, [isEditing]);
+
   return (
     <div className={classes.layout}>
       <Paper className={classes.paper}>
@@ -205,8 +126,8 @@ const Dashboard = ({ setAuth }) => {
         {!isEditing ? (
           <UserDetails {...userDetails} />
         ) : (
-          <EditUserDetails {...userDetails} toggleEdit={toggleEdit} />
-        )}
+            <EditUserDetails {...userDetails} toggleEdit={toggleEdit} />
+          )}
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <div className={classes.buttons}>
@@ -215,7 +136,9 @@ const Dashboard = ({ setAuth }) => {
                   type="submit"
                   variant="contained"
                   color="primary"
-                  onClick={getToken}
+                  onClick={window.location = "http://data.eleos.relyrecruit.com"}
+                  //onClick={getToken} 
+
                   className={classes.button}
                 >
                   Proceed to instance
@@ -242,15 +165,3 @@ const Dashboard = ({ setAuth }) => {
 
 export default Dashboard;
 
-
-/// CSRF Function
-
-/*
-      //addCSRFAndProceed('http://ec2-35-178-199-156.eu-west-2.compute.amazonaws.com/');
-      function addCSRFAndProceed (url) {
-          window.location.href = url + '?token=' + getCSRFTokenAndValue();
-      }
-      function getCSRFTokenAndValue() {
-          return localStorage.csrfToken;
-      }
-      */
