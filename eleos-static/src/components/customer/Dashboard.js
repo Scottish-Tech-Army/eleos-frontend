@@ -58,6 +58,10 @@ const Dashboard = ({ setAuth }) => {
     }
   }
 
+  async function redirect(){
+    window.location = "http://" + db + ".eleos.scottishtecharmy.org/web/login";
+  }
+
    // The function called by the 'Proceed to instance' button
   async function getToken() {
     
@@ -66,7 +70,7 @@ const Dashboard = ({ setAuth }) => {
     
     // Print to console
     console.log('database:' + db);
-    var url = "http://" + db + ".eleos.relyrecruit.com/web/login";
+    var url = "http://" + db + ".eleos.scottishtecharmy.org/web/login";
 
     /*
     function getHTML (oXHR, sTargetId) {
@@ -136,8 +140,9 @@ const Dashboard = ({ setAuth }) => {
                   type="submit"
                   variant="contained"
                   color="primary"
-                  onClick={window.location = "http://data.eleos.relyrecruit.com"}
+                  //onClick={window.location = "http://" + db + ".eleos.relyrecruit.com/web/login"}
                   //onClick={getToken} 
+                  onClick={redirect}
 
                   className={classes.button}
                 >
